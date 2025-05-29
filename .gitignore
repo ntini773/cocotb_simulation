@@ -1,0 +1,13 @@
+# Virtual environments
+.venv/
+
+# Logs
+sim/log_*.txt
+
+# Python artifacts
+**/__pycache__/
+*.pyc
+
+# IDE settings (optional)
+.vscode/
+
