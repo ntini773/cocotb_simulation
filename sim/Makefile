@@ -21,6 +21,7 @@ INCLUDE_DIRS = \
     -I../ibex/lowrisc_ip/ip/prim_generic/rtl \
     -I../ibex/shared/rtl \
     -I../ibex/shared/rtl/sim \
+    -I../ibex/examples/sw/simple_system/hello_test 
 
 # Verilog source files - packages must come first
 # VERILOG_SOURCES = \
@@ -97,9 +98,13 @@ VERILOG_SOURCES = \
     ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_intr_hw.sv \
     ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_lfsr.sv \
     ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_22_16_dec.sv \
+    ../ibex/examples/simple_system/rtl/ibex_simple_system.sv \
+    ../ibex/dv/uvm/core_ibex/common/prim/prim_pkg.sv \
     ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_2p.sv \
-    ../ibex/examples/simple_system/rtl/ibex_simple_system.sv
 
+
+
+VMEM_FILE = $(PWD)/../ibex/examples/sw/simple_system/hello_test/hello_test.vmem
 
 
 # # Verilator arguments
@@ -119,6 +124,7 @@ VERILATOR_ARGS = \
     -Wno-UNSIGNED \
     -Wno-INITIALDLY \
     --language 1800-2017 \
+    -GSRAMInitFile=\"$(VMEM_FILE)\" \
     $(INCLUDE_DIRS)
 
 # # Disable DV coverage to avoid issues with dv_fcov_macros.svh
@@ -134,10 +140,10 @@ VERILATOR_ARGS = \
 # Verilator specific arguments
 COMPILE_ARGS +=  -DRVFI
 export COMPILE_ARGS
-EXTRA_ARGS += $(VERILATOR_ARGS)
-VERILATOR_ARGS += --trace-fst --trace-structs --timing --assert \
-    -Wno-fatal -Wno-UNOPTFLAT -Wno-WIDTH -Wno-CASEINCOMPLETE -Wno-UNSIGNED -Wno-INITIALDLY \
-    $(INCLUDE_DIRS)
+
+# VERILATOR_ARGS += -P ibex_simple_system.SRAMInitFile=\"$(VMEM_FILE)\"
+EXTRA_ARGS += $(VERILATOR_ARGS) 
+SIM_ARGS = $(EXTRA_ARGS)
 
 # Export compilation arguments to cocotb
 export EXTRA_ARGS

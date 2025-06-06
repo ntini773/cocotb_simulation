@@ -22,8 +22,10 @@ async def basic_run_test(dut):
     dut.IO_RST_N.value = 1
     dut._log.info("Released reset.")
 
+    # print(dut.u_ram)
+
     # Wait for a few cycles to let the CPU do something
-    for cycle in range(100):
+    for cycle in range(1500):
         await RisingEdge(dut.IO_CLK)
         # print(hasattr(dut, "IO_UART_TX"))
         if hasattr(dut, "IO_UART_TX"):

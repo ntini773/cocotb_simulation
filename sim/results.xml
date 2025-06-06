@@ -1,6 +1,8 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1748545243" />
-    <testcase name="basic_run_test" classname="test_ibex_simple_system" file="/home/nitin/cocotb_simulation/sim/test_ibex_simple_system.py" lineno="5" time="0.011373758316040039" sim_time_ns="1090.001" ratio_time="95834.7249618279" />
+    <property name="random_seed" value="1749233363" />
+    <testcase name="basic_run_test" classname="test_ibex_simple_system" file="/home/nitin/cocotb_simulation/sim/test_ibex_simple_system.py" lineno="5" time="0.05226016044616699" sim_time_ns="10235.0" ratio_time="195847.08337325213">
+      <failure message="Test failed with RANDOM_SEED=1749233363" />
+    </testcase>
   </testsuite>
 </testsuites>
