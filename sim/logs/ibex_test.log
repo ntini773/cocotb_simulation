@@ -1,0 +1,10 @@
+2025-06-09 16:04:05,122 - INFO - Starting Ibex test simulation
+2025-06-09 16:04:05,122 - INFO - Initialized input signals
+2025-06-09 16:04:05,123 - INFO - Programming memory with test instructions...
+2025-06-09 16:04:05,123 - INFO - Wrote 0x00100093 to address 0x00100080
+2025-06-09 16:04:05,123 - INFO - Wrote 0x00200113 to address 0x00100082
+2025-06-09 16:04:05,123 - INFO - Wrote 0x002081b3 to address 0x00100084
+2025-06-09 16:04:05,123 - INFO - Started memory adapter monitoring
+2025-06-09 16:04:05,123 - INFO - Holding in reset for 5 cycles...
+2025-06-09 16:04:05,124 - INFO - Released reset
+2025-06-09 16:04:05,125 - INFO - Starting execution monitoring for 10 cycles...

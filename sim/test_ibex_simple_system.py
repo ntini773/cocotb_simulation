@@ -23,13 +23,16 @@ async def basic_run_test(dut):
     dut._log.info("Released reset.")
 
     # print(dut.u_ram)
-
+    count =0
     # Wait for a few cycles to let the CPU do something
-    for cycle in range(1500):
+    for cycle in range(15):
         await RisingEdge(dut.IO_CLK)
+        # print(count)
+        count += 1
         # print(hasattr(dut, "IO_UART_TX"))
         if hasattr(dut, "IO_UART_TX"):
             uart_bit = dut.IO_UART_TX.value
             dut._log.info(f"Cycle {cycle}: UART_TX = {uart_bit}")
+
 
     dut._log.info("Basic Ibex simple system test completed.")

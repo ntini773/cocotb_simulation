@@ -24,6 +24,7 @@ imagesize==1.4.1
 importlib_metadata==8.7.0
 inflection==0.5.1
 iniconfig==2.1.0
+intelhex==2.3.0
 Jinja2==3.1.6
 jsonschema==4.24.0
 jsonschema-specifications==2025.4.1
@@ -50,6 +51,7 @@ PyBoolector==3.2.4.20240823.1
 pycodestyle==2.13.0
 pydantic==2.11.5
 pydantic_core==2.33.2
+pyelftools==0.32
 pyflakes==3.3.2
 Pygments==2.19.1
 pyparsing==3.2.3
