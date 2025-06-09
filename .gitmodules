@@ -1,0 +1,6 @@
+[submodule "cocotb"]
+	path = cocotb
+	url = https://github.com/cocotb/cocotb.git
+[submodule "ibex"]
+	path = ibex
+	url = https://github.com/ntini773/ibex.git
