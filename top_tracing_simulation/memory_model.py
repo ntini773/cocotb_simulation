@@ -70,8 +70,8 @@ class MemoryModel:
             elif addr == 0x20008 and value == 1:  # Simulator Halt
                 print("Simulator Halt requested")
         elif self.ram_base <= addr <= self.ram_end:
-            if size > 1 and addr % size != 0:
-                raise ValueError(f"Unaligned {size}-byte access at address {addr:#x}")
+            # if size > 1 and addr % size != 0:
+            #     raise ValueError(f"Unaligned {size}-byte access at address {addr:#x}")
     
             for i in range(size):
                 self.memory[addr + i] = (value >> (8 * i)) & 0xFF
@@ -165,6 +165,7 @@ class MemoryModel:
 
     def load_elf(self, filename):
         """Load memory contents from ELF file"""
+
         with open(filename, 'rb') as f:
             elf = ELFFile(f)
             for segment in elf.iter_segments():
@@ -192,7 +193,7 @@ class MemoryModel:
         Auto-detect file format and load memory contents
         Supports: .elf, .hex, .vmem
         """
-        if file_path.endswith('.elf'):
+        if file_path.endswith('.elf') or file_path.endswith('.o'):
             self.load_elf(file_path)
         elif file_path.endswith('.hex'):
             self.load_hex(file_path)

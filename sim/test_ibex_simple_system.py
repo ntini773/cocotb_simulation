@@ -25,7 +25,7 @@ async def basic_run_test(dut):
     # print(dut.u_ram)
     count =0
     # Wait for a few cycles to let the CPU do something
-    for cycle in range(15):
+    for cycle in range(500):
         await RisingEdge(dut.IO_CLK)
         # print(count)
         count += 1
