@@ -47,7 +47,7 @@ async def test_ibex_top_tracing(dut):
     dut.ram_cfg_i.value = 0
     dut.hart_id_i.value = 0
     dut.fetch_enable_i.value=1
-    dut.boot_addr_i.value = 0x100080  # Reset vector
+    dut.boot_addr_i.value = 0x80000000  # Reset vector
     dut._log.info("Initialized input signals")
 
     # Create memory adapter instance
@@ -58,8 +58,8 @@ async def test_ibex_top_tracing(dut):
     mem_adapter.mem.preload_memory("/home/nitin/cocotb_simulation/top_tracing_simulation/riscv_arithmetic_basic_test_0.o")
   
     # Start memory adapter monitoring
-    # cocotb.start_soon(mem_adapter.monitor_and_respond())
-    await mem_adapter.monitor_and_respond()
+    cocotb.start_soon(mem_adapter.monitor_and_respond())
+    # await mem_adapter.monitor_and_respond()
     dut._log.info("Started memory adapter monitoring")
 
 
@@ -80,7 +80,7 @@ async def test_ibex_top_tracing(dut):
     rvfi_count = 0
     
     dut._log.info(f"Starting execution monitoring for {timeout} cycles...")
-    await mem_adapter.monitor_and_respond()
+    # await mem_adapter.monitor_and_respond()
     for cycle in range(timeout):
         print(f"rvfi_valid: {dut.rvfi_valid.value}, cycle: {cycle}")
         # Log RVFI signals
@@ -147,3 +147,14 @@ async def test_ibex_top_tracing(dut):
     rvfi_handler.close()
     dut._log.removeHandler(fh)
     rvfi_logger.removeHandler(rvfi_handler)
+
+
+from memory_adapter2 import IbexMemoryAdapter
+
+@cocotb.test()
+async def test_lsu(dut):
+    adapter = IbexMemoryAdapter(dut)
+    cocotb.start_soon(adapter.monitor_and_respond())
+
+    # Now run your memory-based test sequences here
+    adapter.mem.preload_memory("/home/nitin/cocotb_simulation/top_tracing_simulation/riscv_arithmetic_basic_test_0.o")

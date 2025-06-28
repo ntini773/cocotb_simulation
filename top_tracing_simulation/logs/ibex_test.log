@@ -1,13 +1,13 @@
-2025-06-21 16:48:08,071 - INFO - Starting Ibex test simulation
-2025-06-21 16:48:08,071 - INFO - Initialized input signals
-2025-06-21 16:48:08,071 - INFO - Programming memory with test instructions...
-2025-06-21 16:48:08,076 - INFO - Started memory adapter monitoring
-2025-06-21 16:48:08,076 - INFO - Holding in reset for 5 cycles...
-2025-06-21 16:48:08,077 - INFO - Released reset
-2025-06-21 16:48:08,077 - INFO - Starting execution monitoring for 100 cycles...
-2025-06-21 16:48:08,078 - INFO - 
+2025-06-22 16:00:29,318 - INFO - Starting Ibex test simulation
+2025-06-22 16:00:29,318 - INFO - Initialized input signals
+2025-06-22 16:00:29,318 - INFO - Programming memory with test instructions...
+2025-06-22 16:00:29,324 - INFO - Started memory adapter monitoring
+2025-06-22 16:00:29,324 - INFO - Holding in reset for 5 cycles...
+2025-06-22 16:00:29,327 - INFO - Released reset
+2025-06-22 16:00:29,327 - INFO - Starting execution monitoring for 100 cycles...
+2025-06-22 16:00:29,329 - INFO - 
 Test completed - Statistics:
-2025-06-21 16:48:08,078 - INFO - Total cycles:          100
-2025-06-21 16:48:08,078 - INFO - Instructions fetched:  0
-2025-06-21 16:48:08,078 - INFO - Data accesses:         0
-2025-06-21 16:48:08,079 - INFO - RVFI instructions:     0
+2025-06-22 16:00:29,329 - INFO - Total cycles:          100
+2025-06-22 16:00:29,329 - INFO - Instructions fetched:  0
+2025-06-22 16:00:29,329 - INFO - Data accesses:         0
+2025-06-22 16:00:29,330 - INFO - RVFI instructions:     0

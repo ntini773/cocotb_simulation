@@ -15,7 +15,7 @@ class IbexMemoryAdapter:
         cycle = 0
         while True and not self.mem.read(0x20008,4)==1:
             cycle += 1
-            print(f"rvfi_valid: {self.dut.rvfi_valid.value}, cycle: {cycle}")
+            print(f"rvfi_va lid: {self.dut.rvfi_valid.value}, cycle: {cycle}")
             await RisingEdge(self.dut.clk_i)
             print(f"Data request signal: {self.dut.data_req_o.value}")
             print(f"Instruction request signal: {self.dut.instr_req_o.value}")

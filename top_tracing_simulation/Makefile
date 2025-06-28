@@ -1,6 +1,6 @@
 TOPLEVEL_LANG = verilog
 TOPLEVEL = ibex_top_tracing
-MODULE = test_ibex_top_tracing
+MODULE = testbench
 SIM = verilator
 
 INCLUDE_DIRS = \

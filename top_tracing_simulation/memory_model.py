@@ -16,11 +16,11 @@ class MemoryModel:
         0x30004	RISC-V timer mtimeh register
         0x30008	RISC-V timer mtimecmp register
         0x3000C	RISC-V timer mtimecmph register
-        0x100000- 0x1FFFFF	1 MB memory for instruction and data. Execution starts at 0x100080, exception handler base is 0x100000
+        0x80000000- 0x80100000	1 MB memory for instruction and data. Execution starts at 0x100080, exception handler base is 0x100000
         '''
         # Byte addressing
         self.memory={}
-        self.ram_base=0x100000
+        self.ram_base=0x80000000
         self.ram_size=1 * 1024 * 1024  # 1MB
         self.ram_end = self.ram_base + self.ram_size - 1
 
@@ -51,6 +51,7 @@ class MemoryModel:
             return value
         else:
             raise ValueError(f"Address {addr:#x} is out of bounds")
+        
 
     def write(self, addr, value, size=4):
         """
@@ -78,81 +79,6 @@ class MemoryModel:
         else:
             raise ValueError(f"Address {addr:#x} is out of bounds")
     
-    # def load_hex(self, filename):
-    #     """
-    #     Load memory contents from Intel HEX format file.
-    #     Intel HEX format:
-    #     :LLAAAATT[DD...]CC
-    #     LL    = Length of data (1-2 hex digits)
-    #     AAAA  = Address (4 hex digits)
-    #     TT    = Record type (00=data, 01=EOF, etc)
-    #     DD    = Data bytes
-    #     CC    = Checksum (Two's complement of sum of all bytes)
-    #     """
-    #     try:
-    #         with open(filename, 'r') as f:
-    #             extended_addr = 0
-    #             for line_num, line in enumerate(f, 1):
-    #                 line = line.strip()
-    #                 if not line.startswith(':'):
-    #                     continue
-                    
-    #                 # Verify line length is valid
-    #                 if len(line) < 11:  # Minimum length for a valid record
-    #                     raise ValueError(f"Line {line_num}: Invalid hex record length")
-                    
-    #                 # Remove colon and convert to bytes
-    #                 try:
-    #                     data = binascii.unhexlify(line[1:])
-    #                 except binascii.Error:
-    #                     raise ValueError(f"Line {line_num}: Invalid hex characters")
-                    
-    #                 # Verify checksum
-    #                 checksum = sum(data) & 0xFF
-    #                 if checksum != 0:
-    #                     raise ValueError(f"Line {line_num}: Checksum error")
-                    
-    #                 # Parse record
-    #                 length = data[0]
-    #                 addr = (data[1] << 8) | data[2]
-    #                 rec_type = data[3]
-                    
-    #                 # Verify data length matches record
-    #                 if len(data) != length + 5:  # length + 4 bytes header + checksum
-    #                     raise ValueError(f"Line {line_num}: Data length mismatch")
-                    
-    #                 # Handle different record types
-    #                 if rec_type == 0x00:  # Data record
-    #                     full_addr = extended_addr + addr
-    #                     for i in range(length):
-    #                         mem_addr = full_addr + i
-    #                         if self.ram_base <= mem_addr <= self.ram_end:
-    #                             self.memory[mem_addr] = data[4 + i]
-    #                         else:
-    #                             print(f"Warning: Address 0x{mem_addr:08x} out of range")
-                                
-    #                 elif rec_type == 0x02:  # Extended Segment Address
-    #                     if length != 2:
-    #                         raise ValueError(f"Line {line_num}: Invalid segment address record")
-    #                     extended_addr = ((data[4] << 8) | data[5]) << 4
-                        
-    #                 elif rec_type == 0x04:  # Extended Linear Address
-    #                     if length != 2:
-    #                         raise ValueError(f"Line {line_num}: Invalid linear address record")
-    #                     extended_addr = ((data[4] << 8) | data[5]) << 16
-                        
-    #                 elif rec_type == 0x01:  # EOF
-    #                     if length != 0:
-    #                         raise ValueError(f"Line {line_num}: Invalid EOF record")
-    #                     break
-                        
-    #                 else:
-    #                     raise ValueError(f"Line {line_num}: Unknown record type: {rec_type}")
-                        
-    #     except FileNotFoundError:
-    #         raise FileNotFoundError(f"HEX file not found: {filename}")
-    #     except Exception as e:
-    #         raise ValueError(f"Error parsing HEX file: {str(e)}")
     
     def load_hex(self, filename):
         """
@@ -169,6 +95,7 @@ class MemoryModel:
         with open(filename, 'rb') as f:
             elf = ELFFile(f)
             for segment in elf.iter_segments():
+                # print(f"Loading segment :{segment}")
                 if segment.header.p_type == 'PT_LOAD':
                     addr = segment.header.p_paddr
                     data = segment.data()
@@ -239,6 +166,13 @@ class MemoryModel:
                 f.write(dump_content)
         
         return dump_content
+
+
+
+
+# you will load instructions but what is data? 
+# Who will initialize data memory?(imem done by riscvdv)
+# The data memory is initialized by the testbench or simulation environment.(dont know how for now)
 
 
 
