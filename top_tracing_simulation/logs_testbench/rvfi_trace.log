@@ -1,0 +1,672 @@
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 1 (Cycle 6) Simulation time 8.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x1
+	.2fns INFO     rvfi_logger          Insn:       0x8a7d55b7
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x80000080
+	.2fns INFO     rvfi_logger          Next PC:    0x80000084
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    11
+	.2fns INFO     rvfi_logger          rd_wdata:   0x8a7d5000
+	.2fns INFO     rvfi_logger          Mem addr:   0x8a7d5000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 2 (Cycle 8) Simulation time 10.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x2
+	.2fns INFO     rvfi_logger          Insn:       0x17258593
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x80000084
+	.2fns INFO     rvfi_logger          Next PC:    0x80000088
+	.2fns INFO     rvfi_logger          rs1_addr:   11
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x8a7d5000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    11
+	.2fns INFO     rvfi_logger          rd_wdata:   0x8a7d5172
+	.2fns INFO     rvfi_logger          Mem addr:   0x8a7d5172
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 3 (Cycle 10) Simulation time 12.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x3
+	.2fns INFO     rvfi_logger          Insn:       0xfa81e637
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x80000088
+	.2fns INFO     rvfi_logger          Next PC:    0x8000008c
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    12
+	.2fns INFO     rvfi_logger          rd_wdata:   0xfa81e000
+	.2fns INFO     rvfi_logger          Mem addr:   0xfa81e000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 4 (Cycle 12) Simulation time 14.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x4
+	.2fns INFO     rvfi_logger          Insn:       0xe7860613
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x8000008c
+	.2fns INFO     rvfi_logger          Next PC:    0x80000090
+	.2fns INFO     rvfi_logger          rs1_addr:   12
+	.2fns INFO     rvfi_logger          rs1_rdata:  0xfa81e000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    12
+	.2fns INFO     rvfi_logger          rd_wdata:   0xfa81de78
+	.2fns INFO     rvfi_logger          Mem addr:   0xfa81de78
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 5 (Cycle 14) Simulation time 16.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x5
+	.2fns INFO     rvfi_logger          Insn:       0xfc95f6b7
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x80000090
+	.2fns INFO     rvfi_logger          Next PC:    0x80000094
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    13
+	.2fns INFO     rvfi_logger          rd_wdata:   0xfc95f000
+	.2fns INFO     rvfi_logger          Mem addr:   0xfc95f000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 6 (Cycle 16) Simulation time 18.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x6
+	.2fns INFO     rvfi_logger          Insn:       0xe3568693
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x80000094
+	.2fns INFO     rvfi_logger          Next PC:    0x80000098
+	.2fns INFO     rvfi_logger          rs1_addr:   13
+	.2fns INFO     rvfi_logger          rs1_rdata:  0xfc95f000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    13
+	.2fns INFO     rvfi_logger          rd_wdata:   0xfc95ee35
+	.2fns INFO     rvfi_logger          Mem addr:   0xfc95ee35
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 7 (Cycle 18) Simulation time 20.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x7
+	.2fns INFO     rvfi_logger          Insn:       0xf120e737
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x80000098
+	.2fns INFO     rvfi_logger          Next PC:    0x8000009c
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    14
+	.2fns INFO     rvfi_logger          rd_wdata:   0xf120e000
+	.2fns INFO     rvfi_logger          Mem addr:   0xf120e000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 8 (Cycle 20) Simulation time 22.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x8
+	.2fns INFO     rvfi_logger          Insn:       0xf6f70713
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x8000009c
+	.2fns INFO     rvfi_logger          Next PC:    0x800000a0
+	.2fns INFO     rvfi_logger          rs1_addr:   14
+	.2fns INFO     rvfi_logger          rs1_rdata:  0xf120e000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    14
+	.2fns INFO     rvfi_logger          rd_wdata:   0xf120df6f
+	.2fns INFO     rvfi_logger          Mem addr:   0xf120df6f
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 9 (Cycle 22) Simulation time 24.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x9
+	.2fns INFO     rvfi_logger          Insn:       0x80000837
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000a0
+	.2fns INFO     rvfi_logger          Next PC:    0x800000a4
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    16
+	.2fns INFO     rvfi_logger          rd_wdata:   0x80000000
+	.2fns INFO     rvfi_logger          Mem addr:   0x80000000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 10 (Cycle 24) Simulation time 26.00ns===
+	.2fns INFO     rvfi_logger          Order:      0xa
+	.2fns INFO     rvfi_logger          Insn:       0x9e5108b7
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000a4
+	.2fns INFO     rvfi_logger          Next PC:    0x800000a8
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    17
+	.2fns INFO     rvfi_logger          rd_wdata:   0x9e510000
+	.2fns INFO     rvfi_logger          Mem addr:   0x9e510000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 11 (Cycle 26) Simulation time 28.00ns===
+	.2fns INFO     rvfi_logger          Order:      0xb
+	.2fns INFO     rvfi_logger          Insn:       0x1fa88893
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000a8
+	.2fns INFO     rvfi_logger          Next PC:    0x800000ac
+	.2fns INFO     rvfi_logger          rs1_addr:   17
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x9e510000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    17
+	.2fns INFO     rvfi_logger          rd_wdata:   0x9e5101fa
+	.2fns INFO     rvfi_logger          Mem addr:   0x9e5101fa
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 12 (Cycle 28) Simulation time 30.00ns===
+	.2fns INFO     rvfi_logger          Order:      0xc
+	.2fns INFO     rvfi_logger          Insn:       0x80000937
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000ac
+	.2fns INFO     rvfi_logger          Next PC:    0x800000b0
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    18
+	.2fns INFO     rvfi_logger          rd_wdata:   0x80000000
+	.2fns INFO     rvfi_logger          Mem addr:   0x80000000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 13 (Cycle 30) Simulation time 32.00ns===
+	.2fns INFO     rvfi_logger          Order:      0xd
+	.2fns INFO     rvfi_logger          Insn:       0x4981
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000b0
+	.2fns INFO     rvfi_logger          Next PC:    0x800000b2
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    19
+	.2fns INFO     rvfi_logger          rd_wdata:   0x00000000
+	.2fns INFO     rvfi_logger          Mem addr:   0x00000000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 14 (Cycle 32) Simulation time 34.00ns===
+	.2fns INFO     rvfi_logger          Order:      0xe
+	.2fns INFO     rvfi_logger          Insn:       0xf70fda37
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000b2
+	.2fns INFO     rvfi_logger          Next PC:    0x800000b6
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    20
+	.2fns INFO     rvfi_logger          rd_wdata:   0xf70fd000
+	.2fns INFO     rvfi_logger          Mem addr:   0xf70fd000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x80000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 15 (Cycle 34) Simulation time 36.00ns===
+	.2fns INFO     rvfi_logger          Order:      0xf
+	.2fns INFO     rvfi_logger          Insn:       0xf2fa0a13
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000b6
+	.2fns INFO     rvfi_logger          Next PC:    0x800000ba
+	.2fns INFO     rvfi_logger          rs1_addr:   20
+	.2fns INFO     rvfi_logger          rs1_rdata:  0xf70fd000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    20
+	.2fns INFO     rvfi_logger          rd_wdata:   0xf70fcf2f
+	.2fns INFO     rvfi_logger          Mem addr:   0xf70fcf2f
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 16 (Cycle 35) Simulation time 37.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x10
+	.2fns INFO     rvfi_logger          Insn:       0x4a81
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000ba
+	.2fns INFO     rvfi_logger          Next PC:    0x800000bc
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    21
+	.2fns INFO     rvfi_logger          rd_wdata:   0x00000000
+	.2fns INFO     rvfi_logger          Mem addr:   0x00000000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 17 (Cycle 36) Simulation time 38.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x11
+	.2fns INFO     rvfi_logger          Insn:       0x4b01
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000bc
+	.2fns INFO     rvfi_logger          Next PC:    0x800000be
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    22
+	.2fns INFO     rvfi_logger          rd_wdata:   0x00000000
+	.2fns INFO     rvfi_logger          Mem addr:   0x00000000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 18 (Cycle 38) Simulation time 40.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x12
+	.2fns INFO     rvfi_logger          Insn:       0xa4976bb7
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000be
+	.2fns INFO     rvfi_logger          Next PC:    0x800000c2
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    23
+	.2fns INFO     rvfi_logger          rd_wdata:   0xa4976000
+	.2fns INFO     rvfi_logger          Mem addr:   0xa4976000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 19 (Cycle 40) Simulation time 42.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x13
+	.2fns INFO     rvfi_logger          Insn:       0x1e9b8b93
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000c2
+	.2fns INFO     rvfi_logger          Next PC:    0x800000c6
+	.2fns INFO     rvfi_logger          rs1_addr:   23
+	.2fns INFO     rvfi_logger          rs1_rdata:  0xa4976000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    23
+	.2fns INFO     rvfi_logger          rd_wdata:   0xa49761e9
+	.2fns INFO     rvfi_logger          Mem addr:   0xa49761e9
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 20 (Cycle 42) Simulation time 44.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x14
+	.2fns INFO     rvfi_logger          Insn:       0x32d73c37
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000c6
+	.2fns INFO     rvfi_logger          Next PC:    0x800000ca
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    24
+	.2fns INFO     rvfi_logger          rd_wdata:   0x32d73000
+	.2fns INFO     rvfi_logger          Mem addr:   0x32d73000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0xfc95ee35
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 21 (Cycle 44) Simulation time 46.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x15
+	.2fns INFO     rvfi_logger          Insn:       0x3e4c0c13
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000ca
+	.2fns INFO     rvfi_logger          Next PC:    0x800000ce
+	.2fns INFO     rvfi_logger          rs1_addr:   24
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x32d73000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    24
+	.2fns INFO     rvfi_logger          rd_wdata:   0x32d733e4
+	.2fns INFO     rvfi_logger          Mem addr:   0x32d733e4
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 22 (Cycle 45) Simulation time 47.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x16
+	.2fns INFO     rvfi_logger          Insn:       0x4c81
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000ce
+	.2fns INFO     rvfi_logger          Next PC:    0x800000d0
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    25
+	.2fns INFO     rvfi_logger          rd_wdata:   0x00000000
+	.2fns INFO     rvfi_logger          Mem addr:   0x00000000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 23 (Cycle 46) Simulation time 48.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x17
+	.2fns INFO     rvfi_logger          Insn:       0x818cdd37
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000d0
+	.2fns INFO     rvfi_logger          Next PC:    0x800000d4
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    26
+	.2fns INFO     rvfi_logger          rd_wdata:   0x818cd000
+	.2fns INFO     rvfi_logger          Mem addr:   0x818cd000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x32d733e4
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 24 (Cycle 48) Simulation time 50.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x18
+	.2fns INFO     rvfi_logger          Insn:       0x41d0d13
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000d4
+	.2fns INFO     rvfi_logger          Next PC:    0x800000d8
+	.2fns INFO     rvfi_logger          rs1_addr:   26
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x818cd000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    26
+	.2fns INFO     rvfi_logger          rd_wdata:   0x818cd041
+	.2fns INFO     rvfi_logger          Mem addr:   0x818cd041
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 25 (Cycle 50) Simulation time 52.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x19
+	.2fns INFO     rvfi_logger          Insn:       0x4dbd
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000d8
+	.2fns INFO     rvfi_logger          Next PC:    0x800000da
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    27
+	.2fns INFO     rvfi_logger          rd_wdata:   0x0000000f
+	.2fns INFO     rvfi_logger          Mem addr:   0x0000000f
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 26 (Cycle 52) Simulation time 54.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x1a
+	.2fns INFO     rvfi_logger          Insn:       0xf9d54e37
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000da
+	.2fns INFO     rvfi_logger          Next PC:    0x800000de
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    28
+	.2fns INFO     rvfi_logger          rd_wdata:   0xf9d54000
+	.2fns INFO     rvfi_logger          Mem addr:   0xf9d54000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 27 (Cycle 54) Simulation time 56.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x1b
+	.2fns INFO     rvfi_logger          Insn:       0x39ae0e13
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000de
+	.2fns INFO     rvfi_logger          Next PC:    0x800000e2
+	.2fns INFO     rvfi_logger          rs1_addr:   28
+	.2fns INFO     rvfi_logger          rs1_rdata:  0xf9d54000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    28
+	.2fns INFO     rvfi_logger          rd_wdata:   0xf9d5439a
+	.2fns INFO     rvfi_logger          Mem addr:   0xf9d5439a
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x818cd041
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 28 (Cycle 56) Simulation time 58.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x1c
+	.2fns INFO     rvfi_logger          Insn:       0x80000eb7
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000e2
+	.2fns INFO     rvfi_logger          Next PC:    0x800000e6
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    29
+	.2fns INFO     rvfi_logger          rd_wdata:   0x80000000
+	.2fns INFO     rvfi_logger          Mem addr:   0x80000000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 29 (Cycle 58) Simulation time 60.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x1d
+	.2fns INFO     rvfi_logger          Insn:       0x80000f37
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000e6
+	.2fns INFO     rvfi_logger          Next PC:    0x800000ea
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    30
+	.2fns INFO     rvfi_logger          rd_wdata:   0x80000000
+	.2fns INFO     rvfi_logger          Mem addr:   0x80000000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 30 (Cycle 60) Simulation time 62.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x1e
+	.2fns INFO     rvfi_logger          Insn:       0x80000fb7
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000ea
+	.2fns INFO     rvfi_logger          Next PC:    0x800000ee
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    31
+	.2fns INFO     rvfi_logger          rd_wdata:   0x80000000
+	.2fns INFO     rvfi_logger          Mem addr:   0x80000000
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 31 (Cycle 62) Simulation time 64.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x1f
+	.2fns INFO     rvfi_logger          Insn:       0x6417
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000ee
+	.2fns INFO     rvfi_logger          Next PC:    0x800000f2
+	.2fns INFO     rvfi_logger          rs1_addr:   00
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    08
+	.2fns INFO     rvfi_logger          rd_wdata:   0x800060ee
+	.2fns INFO     rvfi_logger          Mem addr:   0x800060ee
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0
+	.2fns INFO     rvfi_logger          
+=== RVFI Instruction 32 (Cycle 64) Simulation time 66.00ns===
+	.2fns INFO     rvfi_logger          Order:      0x20
+	.2fns INFO     rvfi_logger          Insn:       0xd7240413
+	.2fns INFO     rvfi_logger          Trap:       0
+	.2fns INFO     rvfi_logger          Halt:       0
+	.2fns INFO     rvfi_logger          Intr:       0
+	.2fns INFO     rvfi_logger          Mode:       0x0
+	.2fns INFO     rvfi_logger          PC:         0x800000f2
+	.2fns INFO     rvfi_logger          Next PC:    0x800000f6
+	.2fns INFO     rvfi_logger          rs1_addr:   08
+	.2fns INFO     rvfi_logger          rs1_rdata:  0x800060ee
+	.2fns INFO     rvfi_logger          rs2_addr:   00
+	.2fns INFO     rvfi_logger          rs2_rdata:  0x00000000
+	.2fns INFO     rvfi_logger          rd_addr:    08
+	.2fns INFO     rvfi_logger          rd_wdata:   0x80005e60
+	.2fns INFO     rvfi_logger          Mem addr:   0x80005e60
+	.2fns INFO     rvfi_logger          Mem rdata:  0x00000000
+	.2fns INFO     rvfi_logger          Mem wdata:  0x80000000
+	.2fns INFO     rvfi_logger          Mem rmask:  0xf
+	.2fns INFO     rvfi_logger          Mem wmask:  0x0

@@ -53,10 +53,11 @@ VERILOG_SOURCES = \
     ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_2p.sv\
 
 VERILATOR_ARGS = \
-	--trace \
+    --trace \
     --trace-structs \
     --timing \
-	--trace-underscore \
+    --trace-underscore \
+    --timescale 1ns/1ps \
     --assert \
     -Wno-fatal \
     -Wno-UNOPTFLAT \

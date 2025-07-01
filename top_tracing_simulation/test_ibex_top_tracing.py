@@ -1,7 +1,7 @@
 import cocotb
 from cocotb.triggers import RisingEdge, Timer
 from cocotb.clock import Clock
-from memory_adapter import IbexMemoryAdapter
+from memory_adapter2 import IbexMemoryAdapter
 from memory_model import MemoryModel
 import logging
 import os
@@ -58,7 +58,8 @@ async def test_ibex_top_tracing(dut):
     mem_adapter.mem.preload_memory("/home/nitin/cocotb_simulation/top_tracing_simulation/riscv_arithmetic_basic_test_0.o")
   
     # Start memory adapter monitoring
-    cocotb.start_soon(mem_adapter.monitor_and_respond())
+    cocotb.start_soon(mem_adapter.monitor_and_respond_data())
+    cocotb.start_soon(mem_adapter.monitor_and_respond_instr())
     # await mem_adapter.monitor_and_respond()
     dut._log.info("Started memory adapter monitoring")
 
@@ -84,38 +85,38 @@ async def test_ibex_top_tracing(dut):
     for cycle in range(timeout):
         print(f"rvfi_valid: {dut.rvfi_valid.value}, cycle: {cycle}")
         # Log RVFI signals
-        if dut.rvfi_valid.value == 1:
+        if True:
             rvfi_count += 1
             rvfi_logger.info(f"\n=== RVFI Instruction {rvfi_count} (Cycle {cycle}) ===")
-            rvfi_logger.info(f"Order:      0x{dut.rvfi_order.value:016x}")
-            rvfi_logger.info(f"Insn:       0x{dut.rvfi_insn.value:08x}")
+            rvfi_logger.info(f"Order:      {dut.rvfi_order.value.integer:#x}")
+            rvfi_logger.info(f"Insn:       {dut.rvfi_insn.value.integer:#x}")
             rvfi_logger.info(f"Trap:       {dut.rvfi_trap.value}")
             rvfi_logger.info(f"Halt:       {dut.rvfi_halt.value}")
             rvfi_logger.info(f"Intr:       {dut.rvfi_intr.value}")
-            rvfi_logger.info(f"Mode:       0x{dut.rvfi_mode.value:02x}")
-            rvfi_logger.info(f"PC:         0x{dut.rvfi_pc_rdata.value:08x}")
-            rvfi_logger.info(f"Next PC:    0x{dut.rvfi_pc_wdata.value:08x}")
+            rvfi_logger.info(f"Mode:       0x{dut.rvfi_mode.value.integer:#x}")
+            rvfi_logger.info(f"PC:         0x{dut.rvfi_pc_rdata.value.integer:#x}")
+            rvfi_logger.info(f"Next PC:    0x{dut.rvfi_pc_wdata.value.integer:#x}")
             
             # Register reads
             for i in range(2):
                 rs_valid = getattr(dut, f'rvfi_rs{i+1}_addr').value
                 rs_data = getattr(dut, f'rvfi_rs{i+1}_rdata').value
-                rvfi_logger.info(f"rs{i+1}_addr:   {rs_valid:02d}")
-                rvfi_logger.info(f"rs{i+1}_rdata:  0x{rs_data:08x}")
+                rvfi_logger.info(f"rs{i+1}_addr:   {rs_valid.integer:02d}")
+                rvfi_logger.info(f"rs{i+1}_rdata:  0x{rs_data.integer:08x}")
             
             # Register writes
             for i in range(1):
-                rd_addr = getattr(dut, f'rvfi_rd{i+1}_addr').value
-                rd_wdata = getattr(dut, f'rvfi_rd{i+1}_wdata').value
-                rvfi_logger.info(f"rd{i+1}_addr:   {rd_addr:02d}")
-                rvfi_logger.info(f"rd{i+1}_wdata:  0x{rd_wdata:08x}")
+                rs_addr = getattr(dut, f'rvfi_rs{i+1}_addr').value
+                rs_wdata = getattr(dut, f'rvfi_rs{i+1}_rdata').value
+                rvfi_logger.info(f"rd{i+1}_addr:   {rs_addr.integer:02d}")
+                rvfi_logger.info(f"rd{i+1}_wdata:  0x{rs_wdata.integer:08x}")
             
             # Memory access
-            rvfi_logger.info(f"Mem addr:   0x{dut.rvfi_mem_addr.value:08x}")
-            rvfi_logger.info(f"Mem rdata:  0x{dut.rvfi_mem_rdata.value:08x}")
-            rvfi_logger.info(f"Mem wdata:  0x{dut.rvfi_mem_wdata.value:08x}")
-            rvfi_logger.info(f"Mem rmask:  0x{dut.rvfi_mem_rmask.value:x}")
-            rvfi_logger.info(f"Mem wmask:  0x{dut.rvfi_mem_wmask.value:x}")
+            rvfi_logger.info(f"Mem addr:   0x{dut.rvfi_mem_addr.value.integer:08x}")
+            rvfi_logger.info(f"Mem rdata:  0x{dut.rvfi_mem_rdata.value.integer:08x}")
+            rvfi_logger.info(f"Mem wdata:  0x{dut.rvfi_mem_wdata.value.integer:08x}")
+            rvfi_logger.info(f"Mem rmask:  0x{dut.rvfi_mem_rmask.value.integer:x}")
+            rvfi_logger.info(f"Mem wmask:  0x{dut.rvfi_mem_wmask.value.integer:x}")
 
         # Log instruction fetches
         if dut.instr_req_o.value == 1:
@@ -149,12 +150,12 @@ async def test_ibex_top_tracing(dut):
     rvfi_logger.removeHandler(rvfi_handler)
 
 
-from memory_adapter2 import IbexMemoryAdapter
+# from memory_adapter2 import IbexMemoryAdapter
 
-@cocotb.test()
-async def test_lsu(dut):
-    adapter = IbexMemoryAdapter(dut)
-    cocotb.start_soon(adapter.monitor_and_respond())
+# @cocotb.test()
+# async def test_lsu(dut):
+#     adapter = IbexMemoryAdapter(dut)
+#     cocotb.start_soon(adapter.monitor_and_respond())
 
-    # Now run your memory-based test sequences here
-    adapter.mem.preload_memory("/home/nitin/cocotb_simulation/top_tracing_simulation/riscv_arithmetic_basic_test_0.o")
+#     # Now run your memory-based test sequences here
+#     adapter.mem.preload_memory("/home/nitin/cocotb_simulation/top_tracing_simulation/riscv_arithmetic_basic_test_0.o")
