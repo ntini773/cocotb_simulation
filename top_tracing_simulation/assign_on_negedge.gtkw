@@ -1,0 +1,33 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Sun Jul  6 12:27:17 2025
+[*]
+[dumpfile] "/home/nitin/cocotb_simulation/top_tracing_simulation/dump.vcd"
+[dumpfile_mtime] "Sun Jul  6 12:22:42 2025"
+[dumpfile_size] 957047
+[savefile] "/home/nitin/cocotb_simulation/top_tracing_simulation/assign_on_negedge.gtkw"
+[timestart] 0
+[size] 3840 2148
+[pos] -142 -142
+*-10.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 507
+[signals_width] 582
+[sst_expanded] 1
+[sst_vpaned_height] 631
+@28
+clk_i
+@22
+instr_addr_o[31:0]
+@28
+instr_req_o
+@29
+instr_gnt_i
+@28
+instr_err_i
+@22
+instr_rdata_i[31:0]
+instr_rdata_intg_i[6:0]
+@28
+instr_rvalid_i
+[pattern_trace] 1
+[pattern_trace] 0

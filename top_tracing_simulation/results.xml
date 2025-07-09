@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1751347634" />
-    <testcase name="test_ibex_top_tracing" classname="testbench" file="/home/nitin/cocotb_simulation/top_tracing_simulation/testbench.py" lineno="45" time="0.07368206977844238" sim_time_ns="101.001" ratio_time="1370.7676820657186" />
+    <property name="random_seed" value="1752072506" />
+    <testcase name="test_ibex_top_tracing" classname="testbench" file="/home/nitin/cocotb_simulation/top_tracing_simulation/testbench.py" lineno="45" time="1.405733585357666" sim_time_ns="1501.001" ratio_time="1067.7706043553728" />
   </testsuite>
 </testsuites>

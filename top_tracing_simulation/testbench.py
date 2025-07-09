@@ -2,10 +2,10 @@ import cocotb
 from cocotb.triggers import RisingEdge, Timer
 from cocotb.clock import Clock
 # from memory_adapter2 import IbexMemoryAdapter
-from lsu_protocol import IbexMemoryAdapter
+from lsu_protocol_self import IbexMemoryAdapter
 from memory_model import MemoryModel
 import logging
-import os
+import os       
 
 # Setup general logging
 log_dir = os.path.join(os.path.dirname(__file__), "logs_testbench")
@@ -74,12 +74,21 @@ async def test_ibex_top_tracing(dut):
     cycle = 0
 
     #Initialize
-    dut.rst_ni.value = 0
+    # await Timer(1, units="ns")  # This variables are needed to be scheduled in scheduler so sometime should be held to assign
+    # rst =getattr(dut, 'rst_ni', None)
+    # rst.value = 0 # Assert reset
+    dut.rst_ni.value = 0  # Assert reset
+    # dut._log.info("Reset asserted , dut.rst_ni.value: %s,rst.value :%s", dut.rst_ni.value,rst.value)
     dut.test_en_i.value = 0
     dut.ram_cfg_i.value = 0
     dut.hart_id_i.value = 0
     dut.fetch_enable_i.value = 1
+    # boot_addr = getattr(dut, 'boot_addr_i', None)
+    # dut._log.info(f"boot_addr_i: {dut.boot_addr_i.value.integer:#x}")  # Log the boot address}")
+    # boot_addr.value = 0x80000000  # Reset vector
+    # await Timer(1, units="ns") 
     dut.boot_addr_i.value = 0x80000000  # Reset vector
+    dut._log.info(f"boot_addr_i: {dut.boot_addr_i.value.integer:#x}")  # Log the boot address}") Doesnt get updated instantly as scheduler need to given time 
     dut._log.info("Initialized input signals")
 
 
@@ -87,10 +96,7 @@ async def test_ibex_top_tracing(dut):
     dut._log.info("Programming memory with test instructions...")
     mem_adapter.mem.preload_memory("/home/nitin/cocotb_simulation/top_tracing_simulation/riscv_arithmetic_basic_test_0.o")
 
-    cocotb.start_soon(mem_adapter.monitor_instr())
-    cocotb.start_soon(mem_adapter.monitor_data())
-    cocotb.start_soon(mem_adapter.respond_data())
-    cocotb.start_soon(mem_adapter.respond_instr())
+    
 
     # cocotb.start_soon(mem_adapter.monitor_and_respond_instr())
     
@@ -99,6 +105,10 @@ async def test_ibex_top_tracing(dut):
     await RisingEdge(dut.clk_i)  # Wait for the first clock edge
     await RisingEdge(dut.clk_i)  # Wait for the second clock edge to ensure DUT is ready
     cycle += 2
+    cocotb.start_soon(mem_adapter.monitor_instr())
+    cocotb.start_soon(mem_adapter.monitor_data())
+    cocotb.start_soon(mem_adapter.respond_data())
+    cocotb.start_soon(mem_adapter.respond_instr())
 
     dut._log.info("Resetting DUT")
     dut.rst_ni.value = 1  # Release reset
@@ -115,10 +125,18 @@ async def test_ibex_top_tracing(dut):
     #     #     dut._log.info(f"Babu Namaste:{dut.rvfi_valid.value}, pc={dut.rvfi_pc_rdata.value}, instr={dut.rvfi_insn.value}, ")
         
     rvfi_count = 0
-    for cycle in range(100):
+    mem_adapter.mem.dump_memory("nitin.txt")
+    v1=mem_adapter.mem.read(0x800000e6, 1)
+    v2=mem_adapter.mem.read(0x800000e7, 1)
+    v3=mem_adapter.mem.read(0x800000e8, 1)
+    v4=mem_adapter.mem.read(0x800000e9, 1)
+    v5=mem_adapter.mem.read(0x800000e6, 4)
+    dut._log.info(f"Memory dump at 0x800000e4: {v1:#x}, 0x800000e5: {v2:#x}, 0x800000e6: {v3:#x}, 0x800000e7: {v4:#x},total:{v5:#x})")
+    for cycle in range(1500):
         await RisingEdge(dut.clk_i)
+        dut._log.info(f"Main Clock :{get_formatted_sim_time()}")
         
-        ibex_logger.debug(
+        ibex_logger.info(
             f"Cycle {cycle}: "
             f"instr_req_o: {dut.instr_req_o.value}, "
             f"instr_addr_o: {dut.instr_addr_o.value.integer:#x}, "
@@ -126,6 +144,7 @@ async def test_ibex_top_tracing(dut):
             f"instr_rdata_i: {dut.instr_rdata_i.value.integer:#x}, "
             f"instr_rvalid_i: {dut.instr_rvalid_i.value}"
         )
+    
 
                 # --- Your RVFI Logging Block (Modified) ---
         if dut.rvfi_valid.value: # Log RVFI signals only when valid

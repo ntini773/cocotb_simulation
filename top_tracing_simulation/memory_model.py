@@ -42,8 +42,8 @@ class MemoryModel:
             return self.peripherals_registers[addr]
         elif self.ram_base <= addr <= self.ram_end:
             # Check alignment for multi-byte access
-            if size > 1 and addr % size != 0:
-                raise ValueError(f"Unaligned {size}-byte access at address {addr:#x}")
+            # if size > 1 and addr % size != 0:
+            #     raise ValueError(f"Unaligned {size}-byte access at address {addr:#x}")
             
             value = 0
             for i in range(size):

@@ -1,0 +1,33 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Sun Jul  6 12:04:13 2025
+[*]
+[dumpfile] "/home/nitin/cocotb_simulation/top_tracing_simulation/dump.vcd"
+[dumpfile_mtime] "Sun Jul  6 12:02:40 2025"
+[dumpfile_size] 736968
+[savefile] "/home/nitin/cocotb_simulation/top_tracing_simulation/direct_assignment_onposedge.gtkw"
+[timestart] 0
+[size] 2880 1632
+[pos] -95 -95
+*-10.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 360
+[signals_width] 398
+[sst_expanded] 1
+[sst_vpaned_height] 479
+@28
+clk_i
+@22
+instr_addr_o[31:0]
+@28
+instr_req_o
+@29
+instr_gnt_i
+@28
+instr_err_i
+@22
+instr_rdata_i[31:0]
+instr_rdata_intg_i[6:0]
+@28
+instr_rvalid_i
+[pattern_trace] 1
+[pattern_trace] 0
