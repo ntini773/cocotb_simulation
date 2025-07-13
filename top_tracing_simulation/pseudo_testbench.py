@@ -4,6 +4,7 @@ from cocotb.clock import Clock
 # from memory_adapter2 import IbexMemoryAdapter
 from lsu_protocol_self import IbexMemoryAdapter
 from memory_model import MemoryModel
+from rvfi_if import RVFI_Interface
 import logging
 import os       
 
@@ -124,6 +125,7 @@ async def test_ibex_top_tracing(dut):
     v3=mem_adapter.mem.read(0x800000e8, 1)
     v4=mem_adapter.mem.read(0x800000e9, 1)
     v5=mem_adapter.mem.read(0x800000e6, 4)
+    rvfi= RVFI_Interface(dut)
     dut._log.info(f"Memory dump at 0x800000e4: {v1:#x}, 0x800000e5: {v2:#x}, 0x800000e6: {v3:#x}, 0x800000e7: {v4:#x},total:{v5:#x})")
     for cycle in range(500):
         await RisingEdge(dut.clk_i)
@@ -154,14 +156,14 @@ async def test_ibex_top_tracing(dut):
             # rvfi_logger.info(f"  ------------------------------------------")
             
             # Core RVFI fields
-            rvfi_logger.info(f"Order:      {dut.rvfi_order.value.integer:#x}") # Added 0x prefix for consistency
-            rvfi_logger.info(f"Insn:       {dut.rvfi_insn.value.integer:#x}") # Added 0x prefix
-            rvfi_logger.info(f"Trap:       {dut.rvfi_trap.value}")
-            rvfi_logger.info(f"Halt:       {dut.rvfi_halt.value}")
-            rvfi_logger.info(f"Intr:       {dut.rvfi_intr.value}")
-            rvfi_logger.info(f"Mode:       {dut.rvfi_mode.value.integer:#x}") # Fixed 0x0x issue
-            rvfi_logger.info(f"PC:         {dut.rvfi_pc_rdata.value.integer:#x}") # Fixed 0x0x issue
-            rvfi_logger.info(f"Next PC:    {dut.rvfi_pc_wdata.value.integer:#x}") # Fixed 0x0x issue
+            rvfi_logger.info(f"Order:      {rvfi.rvfi_order.value.integer:#x}") # Added 0x prefix for consistency
+            rvfi_logger.info(f"Insn:       {rvfi.rvfi_insn.value.integer:#x}") # Added 0x prefix
+            rvfi_logger.info(f"Trap:       {rvfi.rvfi_trap.value}")
+            rvfi_logger.info(f"Halt:       {rvfi.rvfi_halt.value}")
+            rvfi_logger.info(f"Intr:       {rvfi.rvfi_intr.value}")
+            rvfi_logger.info(f"Mode:       {rvfi.rvfi_mode.value.integer:#x}") # Fixed 0x0x issue
+            rvfi_logger.info(f"PC:         {rvfi.rvfi_pc_rdata.value.integer:#x}") # Fixed 0x0x issue
+            rvfi_logger.info(f"Next PC:    {rvfi.rvfi_pc_wdata.value.integer:#x}") # Fixed 0x0x issue
             
             # Register reads
             for i in range(2): 
@@ -190,4 +192,10 @@ async def test_ibex_top_tracing(dut):
     
 
 
-        
+
+# you will load instructions but what is data? 
+# Who will initialize data memory?(imem done by riscvdv)
+# The data memory is initialized by the testbench or simulation environment.(dont know how for now)
+
+
+

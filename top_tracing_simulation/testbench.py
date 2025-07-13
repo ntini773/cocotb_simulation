@@ -2,7 +2,7 @@ import cocotb
 from cocotb.triggers import RisingEdge, Timer
 from cocotb.clock import Clock
 # from memory_adapter2 import IbexMemoryAdapter
-from lsu_protocol_self import IbexMemoryAdapter
+from lsu_protocol import IbexMemoryAdapter
 from memory_model import MemoryModel
 import logging
 import os       

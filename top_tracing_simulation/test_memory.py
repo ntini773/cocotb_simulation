@@ -2,11 +2,10 @@ import memory_model
 from memory_model import MemoryModel
 import unittest
 
-#Testing not Completed
 class TestMemoryModel(unittest.TestCase):
     def setUp(self):
         self.mem = MemoryModel()
-        self.mem.preload_memory("/home/nitin/cocotb_simulation/top_tracing_simulation/riscv_arithmetic_basic_test_0.o")
+        self.mem.preload_memory("./riscv_arithmetic_basic_test_0.o")
 
   
 

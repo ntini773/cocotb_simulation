@@ -16,7 +16,7 @@ class MemoryModel:
         0x30004	RISC-V timer mtimeh register
         0x30008	RISC-V timer mtimecmp register
         0x3000C	RISC-V timer mtimecmph register
-        0x80000000- 0x80100000	1 MB memory for instruction and data. Execution starts at 0x100080, exception handler base is 0x100000
+        0x80000000- 0x80100000	1 MB memory for instruction and data. Execution starts at 0x80000080, exception handler base is 0x80000000
         '''
         # Byte addressing
         self.memory={}
@@ -166,13 +166,6 @@ class MemoryModel:
                 f.write(dump_content)
         
         return dump_content
-
-
-
-
-# you will load instructions but what is data? 
-# Who will initialize data memory?(imem done by riscvdv)
-# The data memory is initialized by the testbench or simulation environment.(dont know how for now)
 
 
 
