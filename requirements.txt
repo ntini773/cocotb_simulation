@@ -60,6 +60,7 @@ python-dateutil==2.9.0.post0
 python-jsonschema-objects==0.5.7
 pytz==2025.2
 pyucis==0.1.4.13484508590
+pyuvm==3.0.0
 pyvsc==0.9.4.14939408520
 PyYAML==6.0.2
 referencing==0.36.2
