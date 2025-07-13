@@ -41,7 +41,7 @@ ch_ibex.setLevel(logging.INFO) # Set the level for console output (e.g., INFO, D
 ch_ibex.setFormatter(formatter) # Use the same formatter for consistent appearance 
 ibex_logger.addHandler(ch_ibex) # Add the console handler to your logger 
 
-
+# Unrefined version of the testbench.py for future reference
 @cocotb.test()
 async def test_ibex_top_tracing(dut):
     """
@@ -66,11 +66,20 @@ async def test_ibex_top_tracing(dut):
     cocotb.start_soon(clock.start())
     cycle = 0
 
+    #Initialize
+    # await Timer(1, units="ns")  # This variables are needed to be scheduled in scheduler so sometime should be held to assign
+    # rst =getattr(dut, 'rst_ni', None)
+    # rst.value = 0 # Assert reset
     dut.rst_ni.value = 0  # Assert reset
+    # dut._log.info("Reset asserted , dut.rst_ni.value: %s,rst.value :%s", dut.rst_ni.value,rst.value)
     dut.test_en_i.value = 0
     dut.ram_cfg_i.value = 0
     dut.hart_id_i.value = 0
     dut.fetch_enable_i.value = 1
+    # boot_addr = getattr(dut, 'boot_addr_i', None)
+    # dut._log.info(f"boot_addr_i: {dut.boot_addr_i.value.integer:#x}")  # Log the boot address}")
+    # boot_addr.value = 0x80000000  # Reset vector
+    # await Timer(1, units="ns") 
     dut.boot_addr_i.value = 0x80000000  # Reset vector
     dut._log.info(f"boot_addr_i: {dut.boot_addr_i.value.integer:#x}")  # Log the boot address}") Doesnt get updated instantly as scheduler need to given time 
     dut._log.info("Initialized input signals")
@@ -97,10 +106,25 @@ async def test_ibex_top_tracing(dut):
     dut._log.info("Resetting DUT")
     dut.rst_ni.value = 1  # Release reset
     ibex_logger.info(f"Default values : dut.instr_addr_o.value: {dut.instr_addr_o.value.integer:#x}")
+    # await Timer(3, units='ns')  # Wait for a few cycles after reset
     dut._log.info("Simulation started, running for 1000 cycles")
+    # for _ in range(100):
+    #     await RisingEdge(dut.clk_i)
 
+    #     dut._log.info(f"Cycle {_ + 1}: Fetch request: {dut.instr_req_o.value}, Fetch address: {dut.instr_addr_o.value.integer:#x},Grant: {dut.instr_gnt_i.value}, Instruction data: {dut.instr_rdata_i.value.integer:#x}")
+    #     dut._log.info(f" rvfi_valid={dut.rvfi_valid.value}, pc={dut.rvfi_pc_rdata.value.integer:#x}, instr={dut.rvfi_insn.value.integer:#x}")
+    #     # Log RVFI signals
+    #     # if dut.rvfi_valid.value:
+    #     #     dut._log.info(f"Babu Namaste:{dut.rvfi_valid.value}, pc={dut.rvfi_pc_rdata.value}, instr={dut.rvfi_insn.value}, ")
+        
     rvfi_count = 0
-    mem_adapter.mem.dump_memory("nitin.txt") # Checking dump memory
+    mem_adapter.mem.dump_memory("nitin.txt")
+    v1=mem_adapter.mem.read(0x800000e6, 1)
+    v2=mem_adapter.mem.read(0x800000e7, 1)
+    v3=mem_adapter.mem.read(0x800000e8, 1)
+    v4=mem_adapter.mem.read(0x800000e9, 1)
+    v5=mem_adapter.mem.read(0x800000e6, 4)
+    dut._log.info(f"Memory dump at 0x800000e4: {v1:#x}, 0x800000e5: {v2:#x}, 0x800000e6: {v3:#x}, 0x800000e7: {v4:#x},total:{v5:#x})")
     for cycle in range(500):
         await RisingEdge(dut.clk_i)
         dut._log.info(f"Main Clock :{get_formatted_sim_time()}")
@@ -120,6 +144,14 @@ async def test_ibex_top_tracing(dut):
             rvfi_count += 1
             # Explicitly log Instruction Fetch Details with specific formatting
             rvfi_logger.info(f"\n=== RVFI Instruction {rvfi_count} (Cycle {cycle}) Simulation time {get_formatted_sim_time()}===")
+            # rvfi_logger.info(f"  --- Instruction Fetch Details (from LSU) ---") 
+            # rvfi_logger.info(f"  Current Cycle: {cycle}") 
+            # rvfi_logger.info(f"  Instr Request: {dut.instr_req_o.value}")
+            # rvfi_logger.info(f"  Instr Address: {dut.instr_addr_o.value.integer:#x}")
+            # rvfi_logger.info(f"  Instr Grant:   {dut.instr_gnt_i.value}")
+            # rvfi_logger.info(f"  Instr RValid:  {dut.instr_rvalid_i.value}")
+            # rvfi_logger.info(f"  Instr Data:    {dut.instr_rdata_i.value.integer:#x}")
+            # rvfi_logger.info(f"  ------------------------------------------")
             
             # Core RVFI fields
             rvfi_logger.info(f"Order:      {dut.rvfi_order.value.integer:#x}") # Added 0x prefix for consistency
