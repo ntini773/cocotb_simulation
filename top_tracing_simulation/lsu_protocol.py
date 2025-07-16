@@ -50,7 +50,7 @@ class IbexMemoryAdapter:
                 # temp=self.mem.read(int(self.dut.data_addr_o.value),4)
                 # self.dut._log.info(f"Read value {temp:#x} from address {int(self.dut.data_addr_o.value):#x}")
 
-            await ReadWrite()
+            # await ReadWrite()
             await RisingEdge(self.dut.clk_i)
             await ReadWrite()
 
@@ -79,10 +79,21 @@ class IbexMemoryAdapter:
             try:
                 if write_enable:
                     # Apply byte enables
-                    for i in range(4):
-                        if byte_enable[i]:
-                            byte = (write_data >> (8 * i)) & 0xFF
-                            self.mem.write(addr + i, byte, 1)
+                    await RisingEdge(self.dut.clk_i)
+                    try:
+                        for i in range(4):
+                            if byte_enable[i]:
+                                byte = (write_data >> (8 * i)) & 0xFF
+                                self.mem.write(addr + i, byte, 1)
+                        # Should raise rvalid even for write operations
+                        self.dut.data_rvalid_i.value = 1
+                        self.dut.data_err_i.value = 0
+                    except Exception as e:
+                        self.dut._log.warning(f"Memory write failed at {addr:#x}: {e}")
+                        adapter_logger.warning(f"{get_formatted_sim_time()} - Memory write failed at {addr:#x}: {e}")
+                        self.dut.data_err_i.value = 1
+                        self.dut.data_rvalid_i.value = 1
+
                 else:
                     await RisingEdge(self.dut.clk_i)  # Stall for 1 cycle to simulate delay
                     try:

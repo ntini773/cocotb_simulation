@@ -78,7 +78,7 @@ async def test_ibex_top_tracing(dut):
 
     mem_adapter = IbexMemoryAdapter(dut)
     dut._log.info("Programming memory with test instructions...")
-    mem_adapter.mem.preload_memory("./riscv_arithmetic_basic_test_0.o")
+    mem_adapter.mem.preload_memory("./ibex_arithmetic_basic_test_0.o")
 
     
 
@@ -100,8 +100,8 @@ async def test_ibex_top_tracing(dut):
     dut._log.info("Simulation started, running for 1000 cycles")
 
     rvfi_count = 0
-    mem_adapter.mem.dump_memory("nitin.txt") # Checking dump memory
-    for cycle in range(500):
+    # mem_adapter.mem.dump_memory("nitin.txt") # Checking dump memory
+    for cycle in range(3500):
         await RisingEdge(dut.clk_i)
         dut._log.info(f"Main Clock :{get_formatted_sim_time()}")
         

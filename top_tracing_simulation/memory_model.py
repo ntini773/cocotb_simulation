@@ -2,6 +2,7 @@ import binascii
 from elftools.elf.elffile import ELFFile
 from typing import List
 from intelhex import IntelHex
+import math
 
 
 class MemoryModel:
@@ -22,6 +23,7 @@ class MemoryModel:
         self.memory={}
         self.ram_base=0x80000000
         self.ram_size=1 * 1024 * 1024  # 1MB
+        self.ram_size =math.inf  # 1MB
         self.ram_end = self.ram_base + self.ram_size - 1
 
         self.peripherals_registers= {
