@@ -78,7 +78,7 @@ async def test_ibex_top_tracing(dut):
 
     mem_adapter = IbexMemoryAdapter(dut)
     dut._log.info("Programming memory with test instructions...")
-    mem_adapter.mem.preload_memory("./ibex_arithmetic_basic_test_0.o")
+    mem_adapter.mem.preload_memory("./ibex_arithmetic_basic_test_0_added_ecall.o")
 
     
 
