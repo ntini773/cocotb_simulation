@@ -1,10 +1,11 @@
 
 ibex_arithmetic_basic_test_0_added_ecall.o:     file format elf32-littleriscv
 
-# Matches with spike simulation
-# Major issue is for every CSR instruction (eg mret command too), it goes to the boot address for exception ecall_handler
+# Trace Matches with spike simulation
+# One issue is for the CSR instructions run into exception handler at the boot address , possibly due to the lower privilege mode and ibex assumes it is illegal instruction and moves to exception handler 
+# Removed the instructions for writing misa csr as ibex has misa hardwrired
 # Rest of the instructions match with spike
-#Both end up in a infinite loop between write_tohost to tohost
+# Both end up in a infinite loop between write_tohost to tohost which is expected
 Disassembly of section .text:
 
 80000000 <$xrv32i2p1_m2p0_zicsr2p0_zifencei2p0_zmmul1p0>:
