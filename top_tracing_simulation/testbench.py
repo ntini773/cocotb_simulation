@@ -1,5 +1,5 @@
 import cocotb
-from cocotb.triggers import RisingEdge, Timer
+from cocotb.triggers import RisingEdge, Timer , ClockCycles
 from cocotb.clock import Clock
 # from memory_adapter2 import IbexMemoryAdapter
 from lsu_protocol import IbexMemoryAdapter
@@ -50,6 +50,9 @@ async def test_ibex_top_tracing(dut):
     """
     
     # print(dir(dut))
+    # print(dir(dut.u_ibex_top))  # Print the attributes of the Ibex top for debugging   
+    # print(dir(dut.u_ibex_top.u_ibex_core))    
+    print(dir(dut.u_ibex_top.u_ibex_core.id_stage_i))    
     def get_formatted_sim_time():
         return f"{cocotb.utils.get_sim_time(units='ns'):.2f}ns" # Force 2 decimal places for consistency
 
@@ -70,41 +73,75 @@ async def test_ibex_top_tracing(dut):
     dut.test_en_i.value = 0
     dut.ram_cfg_i.value = 0
     dut.hart_id_i.value = 0
-    dut.fetch_enable_i.value = 1
     dut.boot_addr_i.value = 0x80000000  # Reset vector
+    await RisingEdge(dut.clk_i) 
+    await RisingEdge(dut.clk_i) 
+    cycle += 2
+    dut._log.info("Programming memory with test instructions...")
+    mem_adapter = IbexMemoryAdapter(dut)
+    dut._log.info("Memory adapter started")
+    mem_adapter.mem.preload_memory("./ibex_arithmetic_basic_test_0_added_ecall.o")
+    dut.fetch_enable_i.value = 1
     dut._log.info(f"boot_addr_i: {dut.boot_addr_i.value.integer:#x}")  # Log the boot address}") Doesnt get updated instantly as scheduler need to given time 
     dut._log.info("Initialized input signals")
 
 
-    mem_adapter = IbexMemoryAdapter(dut)
-    dut._log.info("Programming memory with test instructions...")
-    mem_adapter.mem.preload_memory("./ibex_arithmetic_basic_test_0_added_ecall.o")
 
     
 
     # cocotb.start_soon(mem_adapter.monitor_and_respond_instr())
+    dut._log.info("Resetting DUT")
+    dut.rst_ni.value = 1  # Release reset
     
-    dut._log.info("Memory adapter started")
+    # Wait a few cycles for the core to initialize after reset
+    await RisingEdge(dut.clk_i)
+    await RisingEdge(dut.clk_i)
+    
+    # Log the privilege mode immediately after reset from multiple sources
+    priv_mode_after_reset = dut.rvfi_mode.value.integer
+    cs_priv_mode = dut.u_ibex_top.u_ibex_core.cs_registers_i.priv_mode_id_o.value.integer
+    cs_priv_lvl_q = dut.u_ibex_top.u_ibex_core.cs_registers_i.priv_lvl_q.value.integer
+    rvfi_stage_mode_0 = dut.u_ibex_top.u_ibex_core.rvfi_stage_mode[0].value.integer
+    
+    ibex_logger.info(f"PRIVILEGE MODE ANALYSIS AFTER RESET:")
+    ibex_logger.info(f"  RVFI Mode (dut.rvfi_mode): {priv_mode_after_reset:#x}")
+    ibex_logger.info(f"  CS Registers priv_mode_id_o: {cs_priv_mode:#x}")
+    ibex_logger.info(f"  CS Registers priv_lvl_q: {cs_priv_lvl_q:#x}")
+    ibex_logger.info(f"  RVFI stage_mode[0]: {rvfi_stage_mode_0:#x}")
+    ibex_logger.info(f"  Expected: 0x3 (Machine mode)")
+    
+    dut._log.info(f"Privilege mode after reset: {priv_mode_after_reset:#x}")
+    
+    # ISSUE IDENTIFIED: Ibex is starting in User mode (0x0) instead of Machine mode (0x3)
+    # This is incorrect behavior according to RISC-V specification.
+    # The core should start in Machine mode after reset.
+    if priv_mode_after_reset == 0:
+        ibex_logger.warning("WARNING: Ibex core is starting in User mode instead of Machine mode!")
+        ibex_logger.warning("This will cause CSR instructions to trap to the exception handler.")
+        ibex_logger.warning("Expected behavior: Core should start in Machine mode (0x3) after reset.")
+    elif priv_mode_after_reset == 3:
+        ibex_logger.info("GOOD: Ibex core correctly started in Machine mode.")
+    else:
+        ibex_logger.warning(f"UNEXPECTED: Ibex core started in privilege mode {priv_mode_after_reset:#x}")
+    
     dut._log.info("Starting simulation...")
-    await RisingEdge(dut.clk_i)  # Wait for the first clock edge
-    await RisingEdge(dut.clk_i)  # Wait for the second clock edge to ensure DUT is ready
-    cycle += 2
     cocotb.start_soon(mem_adapter.monitor_instr())
     cocotb.start_soon(mem_adapter.monitor_data())
     cocotb.start_soon(mem_adapter.respond_data())
     cocotb.start_soon(mem_adapter.respond_instr())
 
-    dut._log.info("Resetting DUT")
-    dut.rst_ni.value = 1  # Release reset
+
     ibex_logger.info(f"Default values : dut.instr_addr_o.value: {dut.instr_addr_o.value.integer:#x}")
     dut._log.info("Simulation started, running for 1000 cycles")
 
     rvfi_count = 0
     # mem_adapter.mem.dump_memory("nitin.txt") # Checking dump memory
-    for cycle in range(3500):
+    for cycle in range(3000):
         await RisingEdge(dut.clk_i)
         dut._log.info(f"Main Clock :{get_formatted_sim_time()}")
-        
+        # dut._log.info(f"Hi:{dut.u_ibex_top.u_ibex_core.id_stage_i.priv_mode_i}")
+        ibex_logger.info(f"Cycle:{cycle},Privileged Mode:{dut.u_ibex_top.u_ibex_core.id_stage_i.priv_mode_i}")
+
         ibex_logger.info(
             f"Cycle {cycle}: "
             f"instr_req_o: {dut.instr_req_o.value}, "
@@ -155,7 +192,6 @@ async def test_ibex_top_tracing(dut):
             else:
                 rvfi_logger.info("Mem:        No access")
         # --- End RVFI Logging Block ---
-    
 
 
-        
+
