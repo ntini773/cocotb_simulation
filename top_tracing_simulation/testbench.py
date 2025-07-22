@@ -69,10 +69,11 @@ async def test_ibex_top_tracing(dut):
     cocotb.start_soon(clock.start())
     cycle = 0
 
-    dut.rst_ni.value = 0  # Assert reset
+    dut.rst_ni.value = 1  # Assert reset
     dut.test_en_i.value = 0
     dut.ram_cfg_i.value = 0
     dut.hart_id_i.value = 0
+    dut.fetch_enable_i.value = 1
     dut.boot_addr_i.value = 0x80000000  # Reset vector
     await RisingEdge(dut.clk_i) 
     await RisingEdge(dut.clk_i) 
@@ -80,8 +81,7 @@ async def test_ibex_top_tracing(dut):
     dut._log.info("Programming memory with test instructions...")
     mem_adapter = IbexMemoryAdapter(dut)
     dut._log.info("Memory adapter started")
-    mem_adapter.mem.preload_memory("./ibex_arithmetic_basic_test_0_added_ecall.o")
-    dut.fetch_enable_i.value = 1
+    mem_adapter.mem.preload_memory("./ibex_rand_instr_test_0.o")
     dut._log.info(f"boot_addr_i: {dut.boot_addr_i.value.integer:#x}")  # Log the boot address}") Doesnt get updated instantly as scheduler need to given time 
     dut._log.info("Initialized input signals")
 
@@ -91,11 +91,13 @@ async def test_ibex_top_tracing(dut):
 
     # cocotb.start_soon(mem_adapter.monitor_and_respond_instr())
     dut._log.info("Resetting DUT")
-    dut.rst_ni.value = 1  # Release reset
+    dut.rst_ni.value = 0  # Release reset
     
     # Wait a few cycles for the core to initialize after reset
     await RisingEdge(dut.clk_i)
     await RisingEdge(dut.clk_i)
+    cycle += 2
+    dut.rst_ni.value = 1  # Assert reset again to ensure proper initialization
     
     # Log the privilege mode immediately after reset from multiple sources
     priv_mode_after_reset = dut.rvfi_mode.value.integer
@@ -136,11 +138,11 @@ async def test_ibex_top_tracing(dut):
 
     rvfi_count = 0
     # mem_adapter.mem.dump_memory("nitin.txt") # Checking dump memory
-    for cycle in range(3000):
+    for cycle in range(3500):
         await RisingEdge(dut.clk_i)
         dut._log.info(f"Main Clock :{get_formatted_sim_time()}")
         # dut._log.info(f"Hi:{dut.u_ibex_top.u_ibex_core.id_stage_i.priv_mode_i}")
-        ibex_logger.info(f"Cycle:{cycle},Privileged Mode:{dut.u_ibex_top.u_ibex_core.id_stage_i.priv_mode_i}")
+        # ibex_logger.info(f"Cycle:{cycle},Privileged Mode:{dut.u_ibex_top.u_ibex_core.id_stage_i.priv_mode_i}")
 
         ibex_logger.info(
             f"Cycle {cycle}: "
@@ -150,7 +152,7 @@ async def test_ibex_top_tracing(dut):
             f"instr_rdata_i: {dut.instr_rdata_i.value.integer:#x}, "
             f"instr_rvalid_i: {dut.instr_rvalid_i.value}"
         )
-    
+
 
                 # --- Your RVFI Logging Block (Modified) ---
         if dut.rvfi_valid.value: # Log RVFI signals only when valid
@@ -189,8 +191,15 @@ async def test_ibex_top_tracing(dut):
                 # Add rvfi_mem_extamo if it's always available and desired in your specific Ibex config
                 # if hasattr(dut, 'rvfi_mem_extamo'):
                 #    rvfi_logger.info(f"Mem extamo: 0x{dut.rvfi_mem_extamo.value.integer:x}")
+                if dut.rvfi_mem_addr.value.integer == 0x80002000:
+                    rvfi_logger.info("Simulation ending : Memory access at tohost address 0x80002000")
+                    break
             else:
                 rvfi_logger.info("Mem:        No access")
+            
+
+            
+            
         # --- End RVFI Logging Block ---
 
 
