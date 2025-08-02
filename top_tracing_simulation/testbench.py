@@ -81,7 +81,9 @@ async def test_ibex_top_tracing(dut):
     dut._log.info("Programming memory with test instructions...")
     mem_adapter = IbexMemoryAdapter(dut)
     dut._log.info("Memory adapter started")
-    mem_adapter.mem.preload_memory("./ibex_rand_instr_test_0.o")
+    # mem_adapter.mem.preload_memory("./ibex_arithmetic_basic_test_0.o")
+    mem_adapter.mem.preload_memory("./ibex_load_instr_test_0.o")
+    
     dut._log.info(f"boot_addr_i: {dut.boot_addr_i.value.integer:#x}")  # Log the boot address}") Doesnt get updated instantly as scheduler need to given time 
     dut._log.info("Initialized input signals")
 
@@ -194,6 +196,14 @@ async def test_ibex_top_tracing(dut):
                 if dut.rvfi_mem_addr.value.integer == 0x80002000:
                     rvfi_logger.info("Simulation ending : Memory access at tohost address 0x80002000")
                     break
+                if dut.rvfi_mem_addr.value.integer == 0xdeadbeeb:
+                    if dut.rvfi_mem_wdata.value.integer == 0x00000101:
+                        rvfi_logger.info("Simulation ending :  Test Failed , 101 written to signature address")
+                        break
+                    elif dut.rvfi_mem_wdata.value.integer == 0x00000001:
+                        rvfi_logger.info("Simulation ending :  Test Passed , 1 written to signature address")
+                        break
+                    
             else:
                 rvfi_logger.info("Mem:        No access")
             

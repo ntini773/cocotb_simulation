@@ -6,7 +6,7 @@ import math
 
 
 class MemoryModel:
-    def __init__(self):
+    def __init__(self,ram_base=0x80000000, ram_size=1 * 1024 * 1024):
         # Associative arrays 
         '''
         System Memory Map
@@ -21,9 +21,8 @@ class MemoryModel:
         '''
         # Byte addressing
         self.memory={}
-        self.ram_base=0x80000000
-        self.ram_size=1 * 1024 * 1024  # 1MB
-        self.ram_size =math.inf  # 1MB
+        self.ram_base=ram_base
+        self.ram_size=ram_size
         self.ram_end = self.ram_base + self.ram_size - 1
 
         self.peripherals_registers= {

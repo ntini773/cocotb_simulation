@@ -5,7 +5,7 @@
 sim/log_*.txt
 # Build
 sim/sim_build/
-top_tracing_simulation/sim_build/
+top_tracing_simulation/sim_build/*
 # Python artifacts
 **/__pycache__/
 *.pyc
@@ -14,3 +14,4 @@ top_tracing_simulation/sim_build/
 .vscode/
 top_tracing_simulation/nitin.txt
 learning/
+final/
