@@ -12,7 +12,7 @@ from pathlib import Path
 # Add project paths
 project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root / "env"))
-sys.path.insert(0, str(project_root / "agents" / "spike_agent"))
+sys.path.insert(0, str(project_root / "agents" / "rvfi_agent"))
 sys.path.insert(0, str(project_root / "utils"))
 
 def test_basic_imports():
@@ -47,17 +47,17 @@ def test_basic_imports():
         return False
     
     try:
-        from spike_agent import spike_agent
-        print("✓ Spike agent imported successfully")
+        from rvfi_agent import rvfi_agent
+        print("✓ rvfi agent imported successfully")
     except ImportError as e:
-        print(f"✗ Spike agent import failed: {e}")
+        print(f"✗ rvfi agent import failed: {e}")
         return False
     
     try:
-        from spike_monitor import spike_monitor
-        print("✓ Spike monitor imported successfully")
+        from rvfi_monitor import rvfi_monitor
+        print("✓ rvfi monitor imported successfully")
     except ImportError as e:
-        print(f"✗ Spike monitor import failed: {e}")
+        print(f"✗ rvfi monitor import failed: {e}")
         return False
     
     try:

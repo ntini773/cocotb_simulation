@@ -15,7 +15,7 @@ from pathlib import Path
 
 # Add paths for our modules
 sys.path.insert(0, str(Path("./env").resolve()))
-sys.path.insert(0, str(Path("./agents/spike_agent").resolve()))
+sys.path.insert(0, str(Path("./agents/rvfi_agent").resolve()))
 sys.path.insert(0, str(Path("./utils").resolve()))
 
 # Import our PyUVM components

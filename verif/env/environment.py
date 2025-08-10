@@ -1,27 +1,28 @@
 from pyuvm import *
 from pathlib import Path
 import sys
-sys.path.insert(0, str(Path("../agents/spike_agent").resolve()))
+sys.path.insert(0, str(Path("../agents/rvfi_agent").resolve()))
 # print(sys.path)
-from agents.spike_agent import spike_agent
+from agents.rvfi_agent import rvfi_agent
+from agents.mem_agent.mem_agent import Mem_agent
 from utils.memory_model import MemoryModel
 
 class environment(uvm_env):
     def build_phase(self):
         super().build_phase()
-        
-        # Create  spike agent
-        self.spike_agent = spike_agent.create("spike_agent", self)
 
-        # Create instr_data_mem agent
-        # self.instr_data_mem_agent = instr_data_mem_agent.create("instr_data_mem_agent", self)
+        # Create  rvfi agent
+        self.rvfi_agent = rvfi_agent.create("rvfi_agent", self)
+
+        # Create mem agent
+        self.mem_agent = Mem_agent.create("mem_agent", self)
 
         # Create scoreboard
         # self.scoreboard = scoreboard.create("scoreboard", self)
 
         # Create Memory Instance and register in ConfigDB
         self.mem = MemoryModel()
-        ConfigDB().set(self, "*", "memory_model", self.mem)
+        ConfigDB().set(None, "*", "memory_model", self.mem)
 
 
     

@@ -1,6 +1,6 @@
 import cocotb
-
-class RVFI_Interface():
+import pyuvm
+class RVFI_Interface(metaclass=pyuvm.Singleton):
     def __init__(self):
         self.dut = cocotb.top
         self.clk = cocotb.top.clk_i
