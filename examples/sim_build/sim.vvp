@@ -1,0 +1,29 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x632c64fc0ee0 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x632c64fc1070 .scope module, "simple_dut" "simple_dut" 3 1;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "rst";
+    .port_info 2 /OUTPUT 1 "op";
+o0x755803281018 .functor BUFZ 1, C4<z>; HiZ drive
+v0x632c64fad380_0 .net "clk", 0 0, o0x755803281018;  0 drivers
+o0x755803281048 .functor BUFZ 1, C4<z>; HiZ drive
+v0x632c64fad7e0_0 .net "op", 0 0, o0x755803281048;  0 drivers
+o0x755803281078 .functor BUFZ 1, C4<z>; HiZ drive
+v0x632c64fadbd0_0 .net "rst", 0 0, o0x755803281078;  0 drivers
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/nitin/Desktop/cocotb_simulation/examples/simple_dut.v";
