@@ -5,6 +5,8 @@
 sim/log_*.txt
 # Build
 sim/sim_build/
+verif/sim_build/
+examples/sim_build
 top_tracing_simulation/sim_build/
 # Python artifacts
 **/__pycache__/
