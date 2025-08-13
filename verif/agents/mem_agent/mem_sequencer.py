@@ -7,7 +7,7 @@ class mem_sequencer(uvm_sequencer):
         super().__init__(name, parent)
 
     def build_phase(self):
-        self.addr_ph_port = uvm_tlm_analysis_fifo("addr_ph_port", self)
-
+        self.addr_port = uvm_tlm_analysis_fifo("addr_port", self)
+        
     def reset(self):
-        self.addr_ph_port.flush()
+        self.addr_port.flush()

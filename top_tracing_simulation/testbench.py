@@ -52,7 +52,7 @@ async def test_ibex_top_tracing(dut):
     # print(dir(dut))
     # print(dir(dut.u_ibex_top))  # Print the attributes of the Ibex top for debugging   
     # print(dir(dut.u_ibex_top.u_ibex_core))    
-    print(dir(dut.u_ibex_top.u_ibex_core.id_stage_i))    
+    # print(dir(dut.u_ibex_top.u_ibex_core.id_stage_i))    
     def get_formatted_sim_time():
         return f"{cocotb.utils.get_sim_time(units='ns'):.2f}ns" # Force 2 decimal places for consistency
 
@@ -82,7 +82,7 @@ async def test_ibex_top_tracing(dut):
     mem_adapter = IbexMemoryAdapter(dut)
     dut._log.info("Memory adapter started")
     # mem_adapter.mem.preload_memory("./ibex_arithmetic_basic_test_0.o")
-    mem_adapter.mem.preload_memory("./ibex_load_instr_test_0.o")
+    mem_adapter.mem.preload_memory("./ibex_load_instr_test_5.o")
     
     dut._log.info(f"boot_addr_i: {dut.boot_addr_i.value.integer:#x}")  # Log the boot address}") Doesnt get updated instantly as scheduler need to given time 
     dut._log.info("Initialized input signals")
@@ -134,6 +134,7 @@ async def test_ibex_top_tracing(dut):
     cocotb.start_soon(mem_adapter.respond_data())
     cocotb.start_soon(mem_adapter.respond_instr())
 
+    print(f"Req={cocotb.top.instr_req_o.value}, Addr={cocotb.top.instr_addr_o.value.integer:#x}")
 
     ibex_logger.info(f"Default values : dut.instr_addr_o.value: {dut.instr_addr_o.value.integer:#x}")
     dut._log.info("Simulation started, running for 1000 cycles")
@@ -147,7 +148,7 @@ async def test_ibex_top_tracing(dut):
         # ibex_logger.info(f"Cycle:{cycle},Privileged Mode:{dut.u_ibex_top.u_ibex_core.id_stage_i.priv_mode_i}")
 
         ibex_logger.info(
-            f"Cycle {cycle}: "
+            f"Cycle {cycle+4}: "
             f"instr_req_o: {dut.instr_req_o.value}, "
             f"instr_addr_o: {dut.instr_addr_o.value.integer:#x}, "
             f"instr_gnt_i: {dut.instr_gnt_i.value}, "
