@@ -17,3 +17,6 @@ top_tracing_simulation/sim_build/
 top_tracing_simulation/nitin.txt
 learning/
 final/
+
+verif/working.gtkw
+verif/dump.vcd

@@ -31,4 +31,6 @@ class environment(uvm_env):
             TO DO:
             Connect scoreboard.analysis fifo with spike_agent.monitor
         """
+    def reset(self):
+        self.mem_agent.reset()
 

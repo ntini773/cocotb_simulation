@@ -21,4 +21,6 @@ class Mem_agent(uvm_agent):
         # Connect driver analysis port to monitor.analysis_port
         self.monitor.addr_ph_port.connect(self.sequencer.addr_port.analysis_export)
         self.driver.seq_item_port.connect(self.sequencer.seq_item_export)
-        
+    
+    def reset(self):
+        self.sequencer.reset()

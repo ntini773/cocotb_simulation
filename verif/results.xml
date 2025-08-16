@@ -1,6 +1,0 @@
-<testsuites name="results">
-  <testsuite name="all" package="all">
-    <property name="random_seed" value="1755085594" />
-    <testcase name="BaseTest" classname="tb_top" file="/home/nitin/cocotb_simulation/final/lib/python3.10/site-packages/pyuvm/extension_classes.py" lineno="18" time="0.29485487937927246" sim_time_ns="481.001" ratio_time="1631.314363908787" />
-  </testsuite>
-</testsuites>

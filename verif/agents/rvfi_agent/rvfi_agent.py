@@ -8,3 +8,4 @@ class rvfi_agent(uvm_agent):
     def build_phase(self):
         super().build_phase()
         self.monitor=rvfi_monitor.create("rvfi_monitor", self)
+    
