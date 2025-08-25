@@ -124,7 +124,7 @@ class scoreboard(uvm_scoreboard):
         self.logger.info(f"  PC: {hammer_data['pc_hex']} -> {hammer_data['pc_after_step_hex']}")
         # self.logger.info(f"  Instruction: {hammer_data['instruction_string']}")
         self.logger.info(f"  Instruction Hex: {hammer_data['instruction_hex']:#x}")
-        
+
         # # Register addresses
         # if hammer_data.get("rs1_addr") is not None:
         #     self.logger.info(f"  rs1_addr: {hammer_data['rs1_addr']}")
@@ -138,11 +138,13 @@ class scoreboard(uvm_scoreboard):
         #     self.logger.info(f"  csr_addr: {hammer_data['csr_addr']}")
         #     self.logger.info(f"  csr_value: {hammer_data['csr_value_hex']}")
         
-        # # Register writes
-        # if hammer_data["register_writes"]:
-        #     self.logger.info("  Register writes:")
-        #     for rw in hammer_data["register_writes"]:
-        #         self.logger.info(f"    x{rw['register']} = {rw['value_hex']}")
+        # Register writes
+        # Read working fine!
+        if hammer_data["register_writes"]:
+            self.logger.info("  Register writes:")
+            for rw in hammer_data["register_writes"]:
+                self.logger.info(f"{rw['register']} = {rw['value_hex']}")
+            self.logger.info(f"Rd:x{rvfi_packet.rd_addr} = {rvfi_packet.rd_wdata:#x}")
         # else:
         #     self.logger.info("  Register writes: None")
         
