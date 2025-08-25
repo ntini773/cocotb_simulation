@@ -95,7 +95,7 @@ class mem_driver(uvm_driver):
                         self.mem_if.data_gnt_i.value = 1
                     if self.mem_if.instr_req_o.value:
                         self.mem_if.instr_gnt_i.value = 1
-                    self.logger.critical(f"Sending grant for addr={self.mem_if.instr_addr_o.value.integer:#x}, ir={self.mem_if.instr_req_o.value}, dr={self.mem_if.data_req_o.value} at {get_sim_time(units='ns')}")
+                    # self.logger.critical(f"Sending grant for addr={self.mem_if.instr_addr_o.value.integer:#x}, ir={self.mem_if.instr_req_o.value}, dr={self.mem_if.data_req_o.value} at {get_sim_time(units='ns')}")
 
             # else:
             #     self.mem_if.data_gnt_i.value = 0
@@ -151,12 +151,12 @@ class mem_driver(uvm_driver):
 
 
             if item_received is not None:
-                self.logger.info(f"Item received: Addr={item_received.instr_addr:#x} , Data={item_received.instr_rdata:#x}")
+                # self.logger.info(f"Item received: Addr={item_received.instr_addr:#x} , Data={item_received.instr_rdata:#x}")
                 if item_received.instr_req:
                     self.mem_if.instr_rvalid_i.value = item_received.instr_rvalid
                     self.mem_if.instr_rdata_i.value = item_received.instr_rdata
                     self.mem_if.instr_err_i.value = item_received.instr_err
-                    self.logger.critical(f"Sending instruction read data of addr={item_received.instr_addr:#x}")
+                    # self.logger.critical(f"Sending instruction read data of addr={item_received.instr_addr:#x}")
 
                 if item_received.data_req:
                     self.mem_if.data_rvalid_i.value = item_received.data_rvalid

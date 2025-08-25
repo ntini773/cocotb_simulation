@@ -6,6 +6,8 @@ sys.path.insert(0, str(Path("../agents/rvfi_agent").resolve()))
 from agents.rvfi_agent import rvfi_agent
 from agents.mem_agent.mem_agent import Mem_agent
 from utils.memory_model import MemoryModel
+# from verif.env.scoreboard_new import scoreboard   
+from .scoreboard_new import scoreboard
 
 class environment(uvm_env):
     def build_phase(self):
@@ -18,7 +20,8 @@ class environment(uvm_env):
         self.mem_agent = Mem_agent.create("mem_agent", self)
 
         # Create scoreboard
-        # self.scoreboard = scoreboard.create("scoreboard", self)
+        self.scoreboard = scoreboard.create("scoreboard", self)
+        # self.scoreboard.instantiate_hammer(cocotb.plusargs["ELF_PATH"])
 
         # Create Memory Instance and register in ConfigDB
         self.mem = MemoryModel()
@@ -31,6 +34,7 @@ class environment(uvm_env):
             TO DO:
             Connect scoreboard.analysis fifo with spike_agent.monitor
         """
+        self.rvfi_agent.monitor.item_collected_port.connect(self.scoreboard.rvfi_port.analysis_export)
     def reset(self):
         self.mem_agent.reset()
 

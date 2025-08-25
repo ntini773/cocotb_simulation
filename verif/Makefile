@@ -12,14 +12,52 @@ INCLUDE_DIRS = \
     -I../ibex/dv/uvm/core_ibex/common/prim \
     -I../ibex/vendor/lowrisc_ip/ip/prim_generic/rtl
 
+# VERILOG_SOURCES = \
+#     ../ibex/rtl/*.sv \
+#     ../ibex/vendor/lowrisc_ip/ip/prim/rtl/*.sv \
+#     ../ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/*.sv \
+#     ../ibex/shared/rtl/*.sv \
+#     ../ibex/shared/rtl/sim/*.sv \
+#     ../ibex/dv/uvm/core_ibex/common/prim/*.sv \
+#     ../ibex/vendor/lowrisc_ip/dv/sv/dv_utils/*.svh
+
 VERILOG_SOURCES = \
-    ../ibex/rtl/*.sv \
-    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/*.sv \
-    ../ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/*.sv \
-    ../ibex/shared/rtl/*.sv \
-    ../ibex/shared/rtl/sim/*.sv \
-    ../ibex/dv/uvm/core_ibex/common/prim/*.sv \
-    ../ibex/vendor/lowrisc_ip/dv/sv/dv_utils/*.svh
+    ../ibex/rtl/ibex_pkg.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_cipher_pkg.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_count_pkg.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi_pkg.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_util_pkg.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_pkg.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_pkg.sv \
+    ../ibex/rtl/ibex_tracer_pkg.sv \
+    ../ibex/rtl/ibex_top_tracing.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_2p_pkg.sv \
+    ../ibex/vendor/lowrisc_ip/dv/sv/dv_utils/dv_fcov_macros.svh \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_assert.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_generic_buf.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_generic_ram_2p.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_2p_adv.sv \
+    ../ibex/shared/rtl/bus.sv \
+    ../ibex/shared/rtl/timer.sv \
+    ../ibex/shared/rtl/sim/simulator_ctrl.sv \
+    ../ibex/rtl/ibex_decoder.sv \
+    ../ibex/rtl/ibex_controller.sv \
+    ../ibex/rtl/ibex_register_file_ff.sv \
+    ../ibex/rtl/ibex_compressed_decoder.sv \
+    ../ibex/rtl/ibex_cs_registers.sv \
+    ../ibex/rtl/ibex_ex_block.sv \
+    ../ibex/rtl/ibex_fetch_fifo.sv \
+    ../ibex/rtl/ibex_multdiv_fast.sv \
+    ../ibex/rtl/ibex_id_stage.sv \
+    ../ibex/rtl/ibex_wb_stage.sv \
+    ../ibex/rtl/ibex_core.sv \
+    ../ibex/rtl/ibex_top.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_clock_gating_sync.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_clock_gp_mux2.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_intr_hw.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_lfsr.sv \
+    ../ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_22_16_dec.sv \
+    ../ibex/dv/uvm/core_ibex/common/prim/prim_pkg.sv \
 
 VERILATOR_ARGS = \
     --trace \
@@ -41,15 +79,20 @@ VERILATOR_ARGS = \
 COMPILE_ARGS += -DRVFI
 export COMPILE_ARGS
 
+ifeq ($(MAKECMDGOALS),)
+ifndef ELF_PATH
+$(error You must specify ELF_PATH, e.g. 'make ELF_PATH=./my_test.o')
+endif
+endif
 # # ELF file path for simulation
 # ifndef ELF_PATH
 # $(error You must specify ELF_PATH, e.g. 'make ELF_PATH=./my_test.o')
 # endif
-# ELF_PATH ?= ./ibex_load_instr_test_0.o
-# export ELF_PATH
+ELF_PATH ?= ./ibex_load_instr_test_0.o
+export ELF_PATH
 
 # # PLUSARGS ?= +ELF_PATH=./ibex_load_instr_test_0.o
-# PLUSARGS ?= +ELF_PATH=$(ELF_PATH)
+PLUSARGS ?= +ELF_PATH=$(ELF_PATH)
 
 EXTRA_ARGS += $(VERILATOR_ARGS)
 SIM_ARGS = $(EXTRA_ARGS) $(PLUSARGS)
@@ -60,31 +103,31 @@ export EXTRA_ARGS
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
 
-# Clean target
-clean-all:
-	rm -rf sim_build/
-	rm -rf __pycache__/
-	rm -rf .pytest_cache/
-	rm -rf agents/__pycache__/
-	rm -rf agents/rvfi_agent/__pycache__/
-	rm -rf env/__pycache__/
-	rm -rf utils/__pycache__/
-	rm -f results.xml
-	rm -f dump.vcd
-	rm -f dump.fst
-	rm -f *.log
-	find . -name "*.pyc" -delete
-	find . -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
+# # Clean target
+# clean-all:
+# 	rm -rf sim_build/
+# 	rm -rf __pycache__/
+# 	rm -rf .pytest_cache/
+# 	rm -rf agents/__pycache__/
+# 	rm -rf agents/rvfi_agent/__pycache__/
+# 	rm -rf env/__pycache__/
+# 	rm -rf utils/__pycache__/
+# 	rm -f results.xml
+# 	rm -f dump.vcd
+# 	rm -f dump.fst
+# 	rm -f *.log
+# 	find . -name "*.pyc" -delete
+# 	find . -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
 
-# Help target
-help:
-	@echo "Available targets:"
-	@echo "  make          - Run the PyUVM basic test"
-	@echo "  make clean    - Clean all simulation artifacts"
-	@echo "  make help     - Show this help message"
+# # Help target
+# help:
+# 	@echo "Available targets:"
+# 	@echo "  make          - Run the PyUVM basic test"
+# 	@echo "  make clean    - Clean all simulation artifacts"
+# 	@echo "  make help     - Show this help message"
 
-# Run specific test
-test: clean
-	$(MAKE) MODULE=test_basic
+# # Run specific test
+# test: clean
+# 	$(MAKE) MODULE=test_basic
 
-.PHONY: clean help test
+# .PHONY: clean help test

@@ -21,7 +21,7 @@ class mem_seq(uvm_sequence):
             ia = self.mem_req_item.instr_addr
             dr = self.mem_req_item.data_req
             da = self.mem_req_item.data_addr
-            print(f"Item processing: IR={ir}, IA={ia:#x}, DR={dr}, DA={da:#x}")
+            # print(f"Item processing: IR={ir}, IA={ia:#x}, DR={dr}, DA={da:#x}")
 
             # print(dir(self.sequencer.addr_ph_port.analysis_export))
             # print(dir(self.sequencer.addr_ph_port))
@@ -72,12 +72,11 @@ class mem_seq(uvm_sequence):
                         self.mem_req_item.data_err=1
                         self.mem_req_item.data_rvalid=1
             await self.start_item(self.mem_req_item)
-            print(f"AN ITEM sent at, {cocotb.utils.get_sim_time(units='ns')}, with addr = {self.mem_req_item.instr_addr:#x}")
+            # print(f"AN ITEM sent at, {cocotb.utils.get_sim_time(units='ns')}, with addr = {self.mem_req_item.instr_addr:#x}")
             await self.finish_item(self.mem_req_item)
             if self.mem.read(0x80002000,4)==1:
                 print(f"Detected a 1 at to host at time={get_sim_time(units='ns')}")
                 await Timer(5, units='ns')
                 print(f"Simulation ending : Memory access at tohost address 0x80002000 at time ={get_sim_time(units='ns')}")
                 return
-                # self.drop_objection()
                 

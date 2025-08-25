@@ -18,7 +18,7 @@ class mem_monitor(uvm_monitor):
             await RisingEdge(self.mem_if.clk)
 
         while True:
-            self.logger.info(f"Starting Coroutines")
+            # self.logger.info(f"Starting Coroutines")
             cap=cocotb.start_soon(self.collect_address_phase())
             wfr=cocotb.start_soon(self.wait_for_reset())
             # returned_trigger=await First(cap, wfr) # This will return only if a mid-reset happens
@@ -54,7 +54,7 @@ class mem_monitor(uvm_monitor):
                     self.item.data_wdata_intg = int(self.mem_if.data_wdata_intg_o.value)
 
                 # print(self.item)
-                self.logger.info(f"Fetch Request at {get_sim_time(units='ns')} , addr = {self.item.instr_addr:#x}")
+                # self.logger.info(f"Fetch Request at {get_sim_time(units='ns')} , addr = {self.item.instr_addr:#x}")
                 self.addr_ph_port.write(self.item)
             # self.logger.info(f"Clk edge:{self.cnt}")
             await RisingEdge(self.mem_if.clk)

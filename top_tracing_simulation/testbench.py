@@ -1,11 +1,95 @@
 import cocotb
-from cocotb.triggers import RisingEdge, Timer , ClockCycles
+from cocotb.triggers import RisingEdge, Timer , ClockCycles ,with_timeout
 from cocotb.clock import Clock
 # from memory_adapter2 import IbexMemoryAdapter
 from lsu_protocol import IbexMemoryAdapter
 from memory_model import MemoryModel
 import logging
+import tracemalloc
 import os       
+tracemalloc.start(10)
+import hammer
+# from hammer_instance import sim
+import sys
+from hammer_instance import sim
+sys.path.insert(0, "/home/nitin/hammer-deps/hammer/builddir")
+import asyncio
+import time
+mem_cfg = hammer.mem_cfg_t(hammer.DramBase, 256 * 1024 * 1024)
+elf ="./ibex_load_instr_test_5.o"
+print(elf)
+print("Hi im here")
+# sim = hammer.Hammer(
+#                 "RV32IMC",          # arg0: isa
+#                 "msu",              # arg1: privilege_levels
+#                 "",                 # arg2: vector_arch
+#                 [0],                # arg3: hart_ids
+#                 [mem_cfg],          # arg4: memory_layout (sequence of mem_cfg_t)
+#                 elf,                # arg5: target_binary
+#                 None                # arg6: start_pc (optional)
+#         )
+# print(f"Sim outside func:{type(sim)}")
+# import hammer
+# print(">>> entered make_hammer with", elf, flush=True)
+# mem_cfg = hammer.mem_cfg_t(hammer.DramBase, 256 * 1024 * 1024)
+# print(">>> mem_cfg created", flush=True)
+# h = hammer.Hammer(
+#     "RV32IMC", "msu", "", [0], [mem_cfg], elf, None
+# )
+# print(type(h))
+# print(">>> hammer constructed", flush=True)
+
+import asyncio
+import concurrent.futures
+import hammer
+
+_executor = concurrent.futures.ThreadPoolExecutor(1)
+
+async def make_hammer_async(*args, **kwargs):
+    loop = asyncio.get_running_loop()
+    return await loop.run_in_executor(_executor, hammer.Hammer, *args, **kwargs)
+
+def make_hammer(elf):
+    import hammer
+    print(">>> entered make_hammer with", elf, flush=True)
+    mem_cfg = hammer.mem_cfg_t(hammer.DramBase, 256 * 1024 * 1024)
+    print(">>> mem_cfg created", flush=True)
+    h = hammer.Hammer(
+        "RV32IMC", "msu", "", [0], [mem_cfg], elf, None
+    )
+    print(">>> hammer constructed", flush=True)
+    return h
+# def inst(self):
+#     sim = hammer.Hammer(
+#             "RV32IMC",          # arg0: isa
+#             "msu",              # arg1: privilege_levels
+#             "",                 # arg2: vector_arch
+#             [0],                # arg3: hart_ids
+#             [mem_cfg],          # arg4: memory_layout (sequence of mem_cfg_t)
+#             elf,                # arg5: target_binary
+#             None                # arg6: start_pc (optional)
+#     )
+@cocotb.function
+async def ham():
+    print("HIIIIIIII")
+    print("About to create hammer.Hammer...")
+    
+    # Yield to simulator to prevent blocking
+    await Timer(1, units="ns")
+    
+    # Create hammer object with proper parameters
+    sim = hammer.Hammer(
+                "RV32IMC",          # arg0: isa
+                "msu",              # arg1: privilege_levels
+                "",                 # arg2: vector_arch
+                [0],                # arg3: hart_ids
+                [mem_cfg],          # arg4: memory_layout (sequence of mem_cfg_t)
+                elf,                # arg5: target_binary
+                None                # arg6: start_pc (optional)
+        )
+    print(f"Sim inside func:{type(sim)}")
+    print("Successfully created hammer object")
+    return sim
 
 # Setup general logging
 log_dir = os.path.join(os.path.dirname(__file__), "logs_testbench")
@@ -36,11 +120,13 @@ rvfi_handler.setFormatter(formatter)
 rvfi_logger.addHandler(rvfi_handler)
 rvfi_logger.propagate = False
 
-ch_ibex = logging.StreamHandler() # [cite: 295, 3685]
-ch_ibex.setLevel(logging.INFO) # Set the level for console output (e.g., INFO, DEBUG) [cite: 293, 3677]
-ch_ibex.setFormatter(formatter) # Use the same formatter for consistent appearance 
-ibex_logger.addHandler(ch_ibex) # Add the console handler to your logger 
+# ch_ibex = logging.StreamHandler() # [cite: 295, 3685]
+# ch_ibex.setLevel(logging.INFO) # Set the level for console output (e.g., INFO, DEBUG) [cite: 293, 3677]
+# ch_ibex.setFormatter(formatter) # Use the same formatter for consistent appearance 
+# ibex_logger.addHandler(ch_ibex) # Add the console handler to your logger 
 
+import sys
+import hammer
 
 @cocotb.test()
 async def test_ibex_top_tracing(dut):
@@ -79,7 +165,10 @@ async def test_ibex_top_tracing(dut):
     await RisingEdge(dut.clk_i) 
     cycle += 2
     dut._log.info("Programming memory with test instructions...")
+    s=time.time()
     mem_adapter = IbexMemoryAdapter(dut)
+    e=time.time()
+    print(e-s)
     dut._log.info("Memory adapter started")
     # mem_adapter.mem.preload_memory("./ibex_arithmetic_basic_test_0.o")
     mem_adapter.mem.preload_memory("./ibex_load_instr_test_5.o")
@@ -141,77 +230,111 @@ async def test_ibex_top_tracing(dut):
 
     rvfi_count = 0
     # mem_adapter.mem.dump_memory("nitin.txt") # Checking dump memory
-    for cycle in range(3500):
-        await RisingEdge(dut.clk_i)
-        dut._log.info(f"Main Clock :{get_formatted_sim_time()}")
-        # dut._log.info(f"Hi:{dut.u_ibex_top.u_ibex_core.id_stage_i.priv_mode_i}")
-        # ibex_logger.info(f"Cycle:{cycle},Privileged Mode:{dut.u_ibex_top.u_ibex_core.id_stage_i.priv_mode_i}")
+    # for cycle in range(3500):
+        
+    #     await RisingEdge(dut.clk_i)
+    #     dut._log.info(f"Main Clock :{get_formatted_sim_time()}")
+    #     # dut._log.info(f"Hi:{dut.u_ibex_top.u_ibex_core.id_stage_i.priv_mode_i}")
+    #     # ibex_logger.info(f"Cycle:{cycle},Privileged Mode:{dut.u_ibex_top.u_ibex_core.id_stage_i.priv_mode_i}")
 
-        ibex_logger.info(
-            f"Cycle {cycle+4}: "
-            f"instr_req_o: {dut.instr_req_o.value}, "
-            f"instr_addr_o: {dut.instr_addr_o.value.integer:#x}, "
-            f"instr_gnt_i: {dut.instr_gnt_i.value}, "
-            f"instr_rdata_i: {dut.instr_rdata_i.value.integer:#x}, "
-            f"instr_rvalid_i: {dut.instr_rvalid_i.value}"
-        )
+    #     ibex_logger.info(
+    #         f"Cycle {cycle+4}: "
+    #         f"instr_req_o: {dut.instr_req_o.value}, "
+    #         f"instr_addr_o: {dut.instr_addr_o.value.integer:#x}, "
+    #         f"instr_gnt_i: {dut.instr_gnt_i.value}, "
+    #         f"instr_rdata_i: {dut.instr_rdata_i.value.integer:#x}, "
+    #         f"instr_rvalid_i: {dut.instr_rvalid_i.value}"
+    #     )
 
 
-                # --- Your RVFI Logging Block (Modified) ---
-        if dut.rvfi_valid.value: # Log RVFI signals only when valid
-            rvfi_count += 1
-            # Explicitly log Instruction Fetch Details with specific formatting
-            rvfi_logger.info(f"\n=== RVFI Instruction {rvfi_count} (Cycle {cycle}) Simulation time {get_formatted_sim_time()}===")
+    #             # --- Your RVFI Logging Block (Modified) ---
+    #     if dut.rvfi_valid.value: # Log RVFI signals only when valid
+    #         rvfi_count += 1
+    #         # Explicitly log Instruction Fetch Details with specific formatting
+    #         rvfi_logger.info(f"\n=== RVFI Instruction {rvfi_count} (Cycle {cycle}) Simulation time {get_formatted_sim_time()}===")
             
-            # Core RVFI fields
-            rvfi_logger.info(f"Order:      {dut.rvfi_order.value.integer:#x}") # Added 0x prefix for consistency
-            rvfi_logger.info(f"Insn:       {dut.rvfi_insn.value.integer:#x}") # Added 0x prefix
-            rvfi_logger.info(f"Trap:       {dut.rvfi_trap.value}")
-            rvfi_logger.info(f"Halt:       {dut.rvfi_halt.value}")
-            rvfi_logger.info(f"Intr:       {dut.rvfi_intr.value}")
-            rvfi_logger.info(f"Mode:       {dut.rvfi_mode.value.integer:#x}") # Fixed 0x0x issue
-            rvfi_logger.info(f"PC:         {dut.rvfi_pc_rdata.value.integer:#x}") # Fixed 0x0x issue
-            rvfi_logger.info(f"Next PC:    {dut.rvfi_pc_wdata.value.integer:#x}") # Fixed 0x0x issue
+    #         # Core RVFI fields
+    #         rvfi_logger.info(f"Order:      {dut.rvfi_order.value.integer:#x}") # Added 0x prefix for consistency
+    #         rvfi_logger.info(f"Insn:       {dut.rvfi_insn.value.integer:#x}") # Added 0x prefix
+    #         rvfi_logger.info(f"Trap:       {dut.rvfi_trap.value}")
+    #         rvfi_logger.info(f"Halt:       {dut.rvfi_halt.value}")
+    #         rvfi_logger.info(f"Intr:       {dut.rvfi_intr.value}")
+    #         rvfi_logger.info(f"Mode:       {dut.rvfi_mode.value.integer:#x}") # Fixed 0x0x issue
+    #         rvfi_logger.info(f"PC:         {dut.rvfi_pc_rdata.value.integer:#x}") # Fixed 0x0x issue
+    #         rvfi_logger.info(f"Next PC:    {dut.rvfi_pc_wdata.value.integer:#x}") # Fixed 0x0x issue
             
-            # Register reads
-            for i in range(2): 
-                rs_addr = getattr(dut, f'rvfi_rs{i+1}_addr').value
-                rs_rdata = getattr(dut, f'rvfi_rs{i+1}_rdata').value
-                rvfi_logger.info(f"rs{i+1}_addr:   {rs_addr.integer:02d}")
-                rvfi_logger.info(f"rs{i+1}_rdata:  0x{rs_rdata.integer:08x}")
+    #         # Register reads
+    #         for i in range(2): 
+    #             rs_addr = getattr(dut, f'rvfi_rs{i+1}_addr').value
+    #             rs_rdata = getattr(dut, f'rvfi_rs{i+1}_rdata').value
+    #             rvfi_logger.info(f"rs{i+1}_addr:   {rs_addr.integer:02d}")
+    #             rvfi_logger.info(f"rs{i+1}_rdata:  0x{rs_rdata.integer:08x}")
             
-            # Register writes
-            rvfi_logger.info(f"rd_addr:    {dut.rvfi_rd_addr.value.integer:02d}")
-            rvfi_logger.info(f"rd_wdata:   0x{dut.rvfi_rd_wdata.value.integer:08x}")
+    #         # Register writes
+    #         rvfi_logger.info(f"rd_addr:    {dut.rvfi_rd_addr.value.integer:02d}")
+    #         rvfi_logger.info(f"rd_wdata:   0x{dut.rvfi_rd_wdata.value.integer:08x}")
             
-            # Memory access
-            if dut.rvfi_mem_rmask.value.integer or dut.rvfi_mem_wmask.value.integer:
-                rvfi_logger.info(f"Mem addr:   0x{dut.rvfi_mem_addr.value.integer:08x}")
-                rvfi_logger.info(f"Mem rdata:  0x{dut.rvfi_mem_rdata.value.integer:08x}")
-                rvfi_logger.info(f"Mem wdata:  0x{dut.rvfi_mem_wdata.value.integer:08x}")
-                rvfi_logger.info(f"Mem rmask:  0x{dut.rvfi_mem_rmask.value.integer:x}")
-                rvfi_logger.info(f"Mem wmask:  0x{dut.rvfi_mem_wmask.value.integer:x}")
-                # Add rvfi_mem_extamo if it's always available and desired in your specific Ibex config
-                # if hasattr(dut, 'rvfi_mem_extamo'):
-                #    rvfi_logger.info(f"Mem extamo: 0x{dut.rvfi_mem_extamo.value.integer:x}")
-                if dut.rvfi_mem_addr.value.integer == 0x80002000:
-                    rvfi_logger.info("Simulation ending : Memory access at tohost address 0x80002000")
-                    break
-                if dut.rvfi_mem_addr.value.integer == 0xdeadbeeb:
-                    if dut.rvfi_mem_wdata.value.integer == 0x00000101:
-                        rvfi_logger.info("Simulation ending :  Test Failed , 101 written to signature address")
-                        break
-                    elif dut.rvfi_mem_wdata.value.integer == 0x00000001:
-                        rvfi_logger.info("Simulation ending :  Test Passed , 1 written to signature address")
-                        break
+    #         # Memory access
+    #         if dut.rvfi_mem_rmask.value.integer or dut.rvfi_mem_wmask.value.integer:
+    #             rvfi_logger.info(f"Mem addr:   0x{dut.rvfi_mem_addr.value.integer:08x}")
+    #             rvfi_logger.info(f"Mem rdata:  0x{dut.rvfi_mem_rdata.value.integer:08x}")
+    #             rvfi_logger.info(f"Mem wdata:  0x{dut.rvfi_mem_wdata.value.integer:08x}")
+    #             rvfi_logger.info(f"Mem rmask:  0x{dut.rvfi_mem_rmask.value.integer:x}")
+    #             rvfi_logger.info(f"Mem wmask:  0x{dut.rvfi_mem_wmask.value.integer:x}")
+    #             # Add rvfi_mem_extamo if it's always available and desired in your specific Ibex config
+    #             # if hasattr(dut, 'rvfi_mem_extamo'):
+    #             #    rvfi_logger.info(f"Mem extamo: 0x{dut.rvfi_mem_extamo.value.integer:x}")
+    #             if dut.rvfi_mem_addr.value.integer == 0x80002000:
+    #                 rvfi_logger.info("Simulation ending : Memory access at tohost address 0x80002000")
+    #                 break
+    #             if dut.rvfi_mem_addr.value.integer == 0xdeadbeeb:
+    #                 if dut.rvfi_mem_wdata.value.integer == 0x00000101:
+    #                     rvfi_logger.info("Simulation ending :  Test Failed , 101 written to signature address")
+    #                     break
+    #                 elif dut.rvfi_mem_wdata.value.integer == 0x00000001:
+    #                     rvfi_logger.info("Simulation ending :  Test Passed , 1 written to signature address")
+    #                     break
                     
-            else:
-                rvfi_logger.info("Mem:        No access")
+    #         else:
+    #             rvfi_logger.info("Mem:        No access")
             
 
             
             
-        # --- End RVFI Logging Block ---
+    #     # --- End RVFI Logging Block ---
+
+    # import hammer
+    # print(">>> entered make_hammer with", elf, flush=True)
+    # mem_cfg = hammer.mem_cfg_t(hammer.DramBase, 256 * 1024 * 1024)
+    # print(">>> mem_cfg created", flush=True)
+    # h = hammer.Hammer(
+    #     "RV32IMC", "msu", "", [0], [mem_cfg], elf, None
+    # )
+    # print(">>> hammer constructed", flush=True)
+    # # print(dir(hammer.Hammer))
+    # # xyz = await ham()
+    # try:
+    #     await with_timeout(cocotb.external(make_hammer)(elf), 1, 'ms')
+    # except TimeoutError:
+    #     dut._log.error("Hammer step took too long!")
+    # # print(f"XYZ type:{type(xyz)}")
+    # # print(f"XYZ value: {xyz}")
+    # hakuna = await cocotb.external(make_hammer)(elf)
+    # print(dir(hakuna))
+    # print(type(hakuna))
+    # # Temporarily comment out since xyz is now a dummy string
+    # # print(dir(xyz))
+    # # xyz.get_PC(0)
+    # sim = await make_hammer_async("RV32IMC","msu","",[0],[mem_cfg],"./ibex_load_instr_test_5.o",None)
+    # sim = await ham()
+    # print(f"XYZ type:{type(sim)}")
+    # print(f"XYZ value: {sim}")
+    # if hasattr(sim, 'get_PC'):
+    #     print(f"PC: {sim.get_PC(0)}")
+    # else:
+    #     print("sim object doesn't have get_PC method")
+
+
 
 
 

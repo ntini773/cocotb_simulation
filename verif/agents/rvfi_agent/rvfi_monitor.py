@@ -55,6 +55,6 @@ class rvfi_monitor(uvm_monitor):
             item.rd_wdata = self.rvfi.rd_wdata.value.integer
             
             self.item_collected_port.write(item)
-            self.logger.info(f"Captured RVFI signals")
+            # self.logger.info(f"Captured RVFI signals")
             await RisingEdge(self.rvfi.clk)
 

@@ -8,12 +8,13 @@ import os
 
 @cocotb.test()
 async def top(_):
-    elf_path = os.environ.get("ELF_PATH", "./ibex_load_instr_test_0.o")
-    ConfigDB().is_tracing=True
-    # # Store in ConfigDB for the test to access
-    ConfigDB().set(None, "*", "elf_path", elf_path)
+    # elf_path = os.environ.get("ELF_PATH", "./ibex_load_instr_test_0.o")
+    # ConfigDB().is_tracing=True
+    # # # Store in ConfigDB for the test to access
+    # ConfigDB().set(None, "*", "elf_path", elf_path)
 
-    await uvm_root().run_test("BaseTest",keep_singletons=True)
+    # await uvm_root().run_test("BaseTest",keep_singletons=True)
+    await uvm_root().run_test("BaseTest")
 
 
 

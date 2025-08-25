@@ -15,10 +15,6 @@ class Mem_agent(uvm_agent):
         ConfigDB().set(None, "*", "mem_sequencer", self.sequencer)
 
     def connect_phase(self):
-        # TO DO: 
-        # Connect monitor.analysis_port to sequencer.analysis_fifo.export
-        # Connect sequencer port to driver port
-        # Connect driver analysis port to monitor.analysis_port
         self.monitor.addr_ph_port.connect(self.sequencer.addr_port.analysis_export)
         self.driver.seq_item_port.connect(self.sequencer.seq_item_export)
     

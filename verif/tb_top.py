@@ -17,30 +17,30 @@ from env.mem_interface import Mem_Interface
 from agents.mem_agent.mem_seq_lib import mem_seq
 import os
 
-@pyuvm.test()
+# @pyuvm.test()
 class BaseTest(uvm_test):
 
     def build_phase(self):
         # Get ELF path from ConfigDB
         # self.elf_path = os.environ.get(key="ELF_PATH", default="./ibex_load_instr_test_0.o")
-        try:
-            print(ConfigDB())
-            self.elf_path = ConfigDB().get(None,"", "elf_path")
-        except Exception as e:
-            self.logger.error(f"Error retrieving ELF_PATH from ConfigDB: {e}")
-    
         # try:
-        #     self.elf_path = cocotb.plusargs["ELF_PATH"]
+        #     print(ConfigDB())
+        #     self.elf_path = ConfigDB().get(None,"", "elf_path")
         # except Exception as e:
-        # #     self.logger.error(f"Error retrieving ELF_PATH from plusargs: {e}")
-        # self.elf_path = "./ibex_load_instr_test_0.o"  # default
+        #     self.logger.error(f"Error retrieving ELF_PATH from ConfigDB: {e}")
+    
+        try:
+            self.elf_path = cocotb.plusargs["ELF_PATH"]
+        except Exception as e:
+        #     self.logger.error(f"Error retrieving ELF_PATH from plusargs: {e}")
+            self.elf_path = "./ibex_load_instr_test_0.o"  # default
 
         self.logger.info(f"Using ELF file: {self.elf_path}")
         
         # Set interfaces into ConfigDB
         self.rvfi_if = RVFI_Interface()
         self.mem_if = Mem_Interface()
-        ConfigDB().is_tracing=True
+        # ConfigDB().is_tracing=True
         ConfigDB().set(self, "*", "rvfi_if",self.rvfi_if)
         ConfigDB().set(self, "*", "mem_if",self.mem_if)
 
@@ -84,10 +84,9 @@ class BaseTest(uvm_test):
         cocotb.top.rst_ni.value = 1
 
         # Started Requesting Instructions
-        print(f"Req={cocotb.top.instr_req_o.value}, Addr={cocotb.top.instr_addr_o.value.integer:#x}")
+        # print(f"Req={cocotb.top.instr_req_o.value}, Addr={cocotb.top.instr_addr_o.value.integer:#x}")
         # await ClockCycles(cocotb.top.clk_i, 2)
-
-        # await self.mem_seq.start(self.env.mem_agent.sequencer)
+        await self.mem_seq.start(self.env.mem_agent.sequencer)
 
 
 

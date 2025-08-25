@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1756139258" />
+    <testcase name="top" classname="top" file="/home/nitin/cocotb_simulation/verif/top.py" lineno="9" time="5.304754972457886" sim_time_ns="481.001" ratio_time="90.67355655394857" />
+  </testsuite>
+</testsuites>

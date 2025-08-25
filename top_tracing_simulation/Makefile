@@ -1,6 +1,7 @@
 TOPLEVEL_LANG = verilog
 TOPLEVEL = ibex_top_tracing
-MODULE = testbench
+MODULE = new_test
+COCOTB_SCHEDULER_DEBUG = 1
 SIM = verilator
 
 INCLUDE_DIRS = \
@@ -77,3 +78,4 @@ SIM_ARGS = $(EXTRA_ARGS)
 export EXTRA_ARGS
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
+export LD_LIBRARY_PATH := $SPIKE_HOME/lib:$(LD_LIBRARY_PATH)
